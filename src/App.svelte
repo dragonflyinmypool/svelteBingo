@@ -40,6 +40,7 @@
   </script>
 
 <main>
+  Bingo Caller
   {#if !showBalls}
   <BallDisplay {currentBall} />
     <div id="menuBar">
