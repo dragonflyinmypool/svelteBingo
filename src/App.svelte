@@ -1,13 +1,12 @@
 <script>
-  import BallDisplay from "./components/BallDisplay.svelte";
-  import MenuButton from "./components/MenuButton.svelte";
-  import PickedBallsDisplay from "./components/PickedBallsDisplay.svelte";
+  import PickedBallsDisplay from "./pages/PickedBallsDisplay.svelte";
+  import MainView from "./pages/MainView.svelte";
 
   let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
   let unpickedballs = [...allBalls]
   let currentBall;
 
-  function handleMessage(event) {
+  function nextBall(event) {
     let randomNumber = randomIntFromInterval(0,unpickedballs.length-1)
     currentBall = unpickedballs[randomNumber]
     unpickedballs.splice(randomNumber,1)
@@ -44,17 +43,7 @@
 <main>
   Bingo Caller
   {#if !showBalls}
-    <BallDisplay {currentBall} />
-
-    <div id="menuBar">
-      <MenuButton on:click={newGame} message='New Game' reference='newGameButton'/>
-      {#if unpickedballs.length > 0}
-        <MenuButton on:click={handleMessage} message='Next Ball' reference='nextBall' />
-      {/if}
-      <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton'/>
-      
-      <MenuButton on:click={showSettings} message='Settings' reference='settingsButton'/>
-    </div>
+    <MainView {currentBall} {unpickedballs} {newGame} {nextBall} {showPickedBalls} {showSettings}/>
   {/if}
 
   {#if showBalls}
