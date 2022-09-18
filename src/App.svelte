@@ -37,31 +37,39 @@
   function showSettings(){
     console.log("Settings")
   }
+
+
   </script>
 
 <main>
   Bingo Caller
   {#if !showBalls}
-  <BallDisplay {currentBall} />
+    <BallDisplay {currentBall} />
+
     <div id="menuBar">
+      <MenuButton on:click={newGame} message='New Game' reference='newGameButton'/>
       {#if unpickedballs.length > 0}
-        <MenuButton on:click={handleMessage} message='Next Ball'/>
+        <MenuButton on:click={handleMessage} message='Next Ball' reference='nextBall' />
       {/if}
-      <MenuButton on:click={showPickedBalls} message='Show picked balls'/>
-      <MenuButton on:click={newGame} message='New Game'/>
-      <MenuButton on:click={showSettings} message='Settings'/>
+      <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton'/>
+      
+      <MenuButton on:click={showSettings} message='Settings' reference='settingsButton'/>
     </div>
   {/if}
 
   {#if showBalls}
-  <PickedBallsDisplay {pickedBalls} on:click={hideBalls}/>
+  <PickedBallsDisplay {allBalls} {pickedBalls} on:click={hideBalls}/>
   {/if}
 </main>
 
 <style>
   main {
     font-weight: bold;
-    width: 1000px;
+    width: 1700px;
+    display: grid;
+    grid-template-rows:40px 750px 100px;
+    justify-items: center;
+    align-items: center;
   }
   #MenuBar {
     display: flex;

@@ -12,8 +12,8 @@
 
 <style>
   #ball {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     background: #fbe3ff;
     color:#0f1152;
     border-radius: 50%;
@@ -21,8 +21,8 @@
   }
   #ballNumber {
     position: relative;
-    top: 140px;
-    font-size: 220px;
+    top: 240px;
+    font-size: 380px;
     text-align: center;
   }
 </style>

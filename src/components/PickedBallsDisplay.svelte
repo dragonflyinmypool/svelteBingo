@@ -1,22 +1,25 @@
 <script>
   export let pickedBalls;
+  export let allBalls;
+
 </script>
 
 <div id="ballContainer">
-  {#each pickedBalls as ball}
+  {#each allBalls as ball}
     <div class="ball">
       <span class="ballNumber">{ball}</span>
     </div>
   {/each}
 </div>
-<br>
-<button on:click>Back</button>
+<button on:click id="button" autofocus>Back</button>
 
 <style>
   #ballContainer {
     display: grid;
-    grid-template-columns: repeat(8, 90px);
-    grid-template-rows: repeat(5, 90px);
+    grid-template-columns: repeat(10, 90px);
+    grid-template-rows: repeat(8, 80px);
+    justify-items: center;
+    align-items: center;
 
   }
   .ball {
@@ -30,8 +33,12 @@
   .ballNumber {
     width: 70px;
     height: 70px;
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
     line-height: 70px;
+  }
+   button {
+    margin-top: 10px;
+    width: 370px;
   }
 </style>
