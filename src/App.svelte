@@ -1,20 +1,8 @@
 <script>
-  // ***PAGES***
-  import PickedBalls from "./pages/PickedBalls.svelte";
-  import Main from "./pages/Main.svelte";
-  import MainTogether from "./pages/MainTogether.svelte";
-  import Settings from "./pages/Settings.svelte";
-
-  let pages = ['main', 'ballview', 'settings','maintogether']
-  let currentPage = 'maintogether'
-
-  function changePage(page) {
-    currentPage = page;
-  }
 
   // ***SETTINGS***
   let settings = {
-    showBallsTogether: false,
+    mainPage: 'main',
     numberOfBalls: 75,
     showLetter: true,
     repeatCall: false,
@@ -22,6 +10,21 @@
     autoCallBalls: false,
     speedOfAutoCall: 10,
   }
+
+  // ***PAGES***
+  import PickedBalls from "./pages/PickedBalls.svelte";
+  import Main from "./pages/Main.svelte";
+  import MainTogether from "./pages/MainTogether.svelte";
+  import Settings from "./pages/Settings.svelte";
+
+  let pages = ['main','maintogether', 'ballview', 'settings']
+  let currentPage = settings.mainPage
+
+  function changePage(page) {
+    currentPage = page;
+  }
+
+
 
   // ***GAME SETUP***
   let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
@@ -34,6 +37,7 @@
   function newGame() {
     unpickedballs = [...allBalls]
     currentBall = undefined
+    pickedBalls = []
   }
 
   // ***GAME PLAY***
@@ -74,12 +78,12 @@
     <PickedBalls 
       {allBalls} 
       {pickedBalls} 
-      on:click={()=>changePage('main')}
+      on:click={()=>changePage(settings.mainPage)}
     />
 
   {:else if currentPage == 'settings'}
     <Settings 
-      on:click={()=>changePage('main')} 
+      on:click={()=>changePage(settings.mainPage)} 
     />
   {/if}
 
@@ -90,7 +94,7 @@
     font-weight: bold;
     width: 1700px;
     display: grid;
-    grid-template-rows:80px 950px 100px;
+    grid-template-rows:950px 100px;
     justify-items: center;
     align-items: center;
   }
