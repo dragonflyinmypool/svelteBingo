@@ -11,7 +11,7 @@
     </div>
   {/each}
 </div>
-<button on:click id="button" autofocus>Back</button>
+<button on:click id="button">Back</button>
 
 <style>
   #ballContainer {
