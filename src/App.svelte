@@ -12,7 +12,6 @@
     currentPage = page;
   }
 
-
   // Game play
   let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
   let unpickedballs = [...allBalls]

@@ -1,13 +1,13 @@
 <script>
   export let pickedBalls;
   export let allBalls;
-
 </script>
 
+<!--  -->
 <div id="ballContainer">
   {#each allBalls as ball}
-    <div class="ball">
-      <span class="ballNumber">{ball}</span>
+    <div class="ball {pickedBalls.includes(ball) ? 'active' : 'inactive'}">
+        <span class="ballNumber ">{ball}</span>    
     </div>
   {/each}
 </div>
@@ -25,11 +25,20 @@
   .ball {
     width: 70px;
     height: 70px;
-    background: #fbe3ff;
-    color:#0f1152;
     border-radius: 50%;
     display: inline-block;
   }
+
+  .inactive{
+    background: grey;
+    color:grey;
+  }
+
+  .active {
+    background: #fbe3ff;
+    color:#0f1152;
+  }
+
   .ballNumber {
     width: 70px;
     height: 70px;
@@ -37,7 +46,7 @@
     text-align: center;
     line-height: 70px;
   }
-   button {
+  button {
     margin-top: 10px;
     width: 370px;
   }

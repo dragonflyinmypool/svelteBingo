@@ -6,5 +6,5 @@
 
 <main>
 	<h1>Settings</h1>
-	<button on:click id="button" autofocus>Back</button>
 </main>
+<MenuButton on:click message='Back' reference='nextBall' />
