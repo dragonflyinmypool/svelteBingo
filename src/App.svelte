@@ -1,7 +1,19 @@
 <script>
-  import PickedBallsDisplay from "./pages/PickedBallsDisplay.svelte";
-  import MainView from "./pages/MainView.svelte";
+  import PickedBalls from "./pages/PickedBalls.svelte";
+  import Main from "./pages/Main.svelte";
+  import Settings from "./pages/Settings.svelte";
 
+
+  // Page control
+  let pages = ['main', 'ballview', 'settings']
+  let currentPage = 'main'
+
+  function changePage(page) {
+    currentPage = page;
+  }
+
+
+  // Game play
   let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
   let unpickedballs = [...allBalls]
   let currentBall;
@@ -18,36 +30,27 @@
   }
 
   let pickedBalls = [];
-  let showBalls = false;
+
   function showPickedBalls() {
     pickedBalls = allBalls.filter((ball) =>{
       return !unpickedballs.includes(ball)
     })
-    showBalls = true;
+    changePage('ballview');
   }
-  function hideBalls () {
-    showBalls = false;
-  }
-
 
   function randomIntFromInterval(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min)
   }
-  function showSettings(){
-    console.log("Settings")
-  }
-
-
-  </script>
+</script>
 
 <main>
   Bingo Caller
-  {#if !showBalls}
-    <MainView {currentBall} {unpickedballs} {newGame} {nextBall} {showPickedBalls} {showSettings}/>
-  {/if}
-
-  {#if showBalls}
-  <PickedBallsDisplay {allBalls} {pickedBalls} on:click={hideBalls}/>
+  {#if currentPage == 'main'}
+    <Main {currentBall} {unpickedballs} {newGame} {nextBall} {showPickedBalls} showSettings={()=>changePage('settings')}/>
+  {:else if currentPage == 'ballview'}
+    <PickedBalls {allBalls} {pickedBalls} on:click={()=>changePage('main')}/>
+  {:else if currentPage == 'settings'}
+    <Settings on:click={()=>changePage('main')} />
   {/if}
 </main>
 
