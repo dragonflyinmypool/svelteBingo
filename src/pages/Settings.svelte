@@ -14,8 +14,8 @@
 
 <main>
 	
-	<label for="withBallDisplay"> 
-		Show called balls on main screen
+	<label for="withBallDisplay" id="label"> 
+		<span>Show called balls on main screen</span>
 	</label>
 	<input type="checkbox" name="withBallDisplay" id="withBallDisplay" class="checkbox"  bind:checked={check}>  
 
@@ -27,9 +27,12 @@
 		display: grid;
 		grid-template-columns: 600px 100px 300px 600px 100px;
 		grid-template-rows: 150px 150px 150px 150px 150px;
-    align-items: center;
 	}
 	.checkbox {
 		height: 100px;
+	}
+	label {
+		display: flex;
+		align-items: center;
 	}
 </style>

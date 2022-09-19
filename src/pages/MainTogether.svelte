@@ -9,6 +9,7 @@
   export let showSettings
   export let allBalls
   export let pickedBalls
+  export let repeatCall
 </script>
 
 
@@ -30,7 +31,8 @@
 
 <div id="menuBar">
   <MenuButton on:click={newGame} message='New Game' reference='newGameButton'/>
-  
+  <MenuButton on:click={repeatCall} message='Reapeat Ball' reference='repeatBall'/>
+
   {#if unpickedballs.length > 0}
     <MenuButton on:click={nextBall} message='Next Ball' reference='nextBall' />
   {/if}

@@ -50,7 +50,10 @@
     pickedBalls = allBalls.filter((ball) =>{
       return !unpickedballs.includes(ball)
     })
-  }  
+  } 
+  function repeatCall() {
+    console.log('Repeat call')
+  }
 </script>
 
 <main>
@@ -59,7 +62,8 @@
       {currentBall} 
       {unpickedballs} 
       {newGame} 
-      {nextBall} 
+      {nextBall}
+      {repeatCall}
       showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
@@ -71,7 +75,8 @@
       {currentBall} 
       {unpickedballs} 
       {newGame} 
-      {nextBall} 
+      {nextBall}
+      {repeatCall}
       showSettings={()=>changePage('settings')}
     />
   

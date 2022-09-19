@@ -11,6 +11,6 @@
 <style>
   button {
     margin-top: 10px;
-    width: 370px;
+    width: 270px;
   }
 </style>
