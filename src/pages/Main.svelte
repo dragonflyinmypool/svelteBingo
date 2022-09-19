@@ -11,8 +11,7 @@
   export let settings
 </script>
 
-
-<BallDisplay {currentBall} />
+<BallDisplay {currentBall} {settings} />
 
 <MenuBar 
   {currentBall} 

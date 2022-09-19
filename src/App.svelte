@@ -4,7 +4,7 @@
   let settings = {
     mainPage: 'main',
     showNumbers:false,
-    numberOfBalls: 75,
+    numberOfBalls: 100,
     showLetter: true,
     repeatCall: false,
     callLanguages: [],
@@ -28,14 +28,15 @@
   }
 
   // ***GAME SETUP***
-  let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
-  let pickedBalls = [];
+  let allBalls;
+  let pickedBalls;
   let currentBall;
   let unpickedballs;
   newGame()
 
   // ***NEW GAME***
   function newGame() {
+    allBalls = Array.from({ length: settings.numberOfBalls }, (_, i) => i + 1);
     unpickedballs = [...allBalls]
     currentBall = undefined
     pickedBalls = []
@@ -91,6 +92,7 @@
   {:else if currentPage == 'settings'}
     <Settings
       {settings}
+      {newGame}
       on:click={()=>changePage(settings.mainPage)}
     />
   {/if}

@@ -1,6 +1,11 @@
 <script>
   import MenuButton from "../components/MenuButton.svelte";
+  import SelectButton from "../components/SelectButton.svelte";
+  import SelectButton2 from "../components/SelectButton2.svelte";
+
   export let settings
+  export let newGame
+  
   let check = settings.showNumbers
   
   $: {
@@ -8,73 +13,45 @@
   	settings.mainPage = check ? 'maintogether' : 'main'
 		settings = settings
 	}
+
 	let checked2 = true
+
+	let ballNumberQ = [30,75,80,90,100];
+	let language1 = ['None', 'Arabic', 'Chinese', 'English', 'French', 'Italian']
+	let language2 = ['None', 'Arabic', 'Chinese', 'English', 'French', 'Italian']
+	let language3 = ['None', 'Arabic', 'Chinese', 'English', 'French', 'Italian']
+
 </script>
 
 <main>
 	
-		<label for="withBallDisplay" id="label"> 
-		<span>Number of balls</span>
-	</label>
-	<div class="select">
-	  <select>
-	    <option value="0">30</option>
-	    <option value="1">75</option>
-	    <option value="2">80</option>
-	    <option value="3">90</option>
-	    <option value="4">100</option>
-	</div>
-
-
+	<!-- 1 -->
+	<SelectButton options={ballNumberQ} currentSetting={settings.numberOfBalls} {settings} {newGame}/>
 		<br>
-	<label for="withBallDisplay" id="label"> 
-		<span>Voice caller 1</span>
-	</label>
-	<div class="select">
-	  <select>
-	    <option value="0">None</option>
-	    <option value="1">English</option>
-	    <option value="2">Italian</option>
-	    <option value="3">Spanish</option>
-	    <option value="4">French</option>
-	    <option value="4">Arabic</option>
-	</div>
+
+	<!-- 2 -->
+	<SelectButton2 options={language1} text='Voice caller 1' />
+
+	<!-- 3 -->
 	<label for="withBallDisplay" id="label"> 
 		<span>Show called balls on main screen</span>
 	</label>
 	<input type="checkbox" name="withBallDisplay" id="withBallDisplay" class="checkbox"  bind:checked={check}>  
 
 	<div></div>
-	<label for="withBallDisplay" id="label"> 
-		<span>Voice caller 2</span>
-	</label>
-	<div class="select">
-	  <select>
-	    <option value="0">None</option>
-	    <option value="1">English</option>
-	    <option value="2">Italian</option>
-	    <option value="3">Spanish</option>
-	    <option value="4">French</option>
-	    <option value="4">Arabic</option>
-	</div>
+	<!-- 4  -->
+	<SelectButton2 options={language2} text='Voice caller 2' />
+
+	<!-- 5  -->
 	<label for="withBallDisplay" id="label"> 
 		<span>Repeat each ball</span>
 	</label>
 	<input type="checkbox" name="repeat" id="repeat" class="checkbox"  bind:checked={checked2}>  
 
 	<div></div>
-	<label for="withBallDisplay" id="label"> 
-		<span>Voice caller 3</span>
-	</label>
-	<div class="select">
-	  <select>
-	    <option value="0">None</option>
-	    <option value="1">English</option>
-	    <option value="2">Italian</option>
-	    <option value="3">Spanish</option>
-	    <option value="4">French</option>
-	    <option value="4">Arabic</option>
-	</div>
+	<!-- 6  -->
+	<SelectButton2 options={language3} text='Voice caller 3' />
+
 
 </main>
 <MenuButton on:click message='Back' reference='nextBall' />

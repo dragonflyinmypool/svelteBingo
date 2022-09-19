@@ -1,31 +1,31 @@
 <script>
   export let currentBall;
+  export let settings;
 
-  $: displayThis = addLetter(currentBall)
+  $: displayThis = settings.numberOfBalls == 75 ? addLetter(currentBall) : currentBall 
 
   function addLetter(currentBall) {
     let withLetter
 
     switch (true) {
       case currentBall == undefined:
-        withLetter = "";
+        withLetter = '';
         break; 
       case currentBall <= 15:
-        withLetter = "B" + currentBall;
+        withLetter = '<span class="letter" style="color:#5800ff">B</span>' + currentBall;
         break;
       case currentBall <= 30:
-        withLetter = "I" + currentBall;
+        withLetter = '<span class="letter" style="color:#5800ff">I</span>' + currentBall;
         break;
       case currentBall <= 45:
-        withLetter = "N" + currentBall;
+        withLetter = '<span class="letter" style="color:#5800ff">N</span>' + currentBall;
         break;
       case currentBall <= 60:
-        withLetter = "G" + currentBall;
+        withLetter ='<span class="letter" style="color:#5800ff">G</span>' + currentBall;
         break;  
       default:
-      withLetter = "O" + currentBall;
+      withLetter = '<span class="letter" style="color:#5800ff">O</span>' + currentBall;
   } 
-
     return withLetter
   }
 </script>
@@ -33,12 +33,15 @@
 <div id="ball">
   <span id="ballNumber">
     {#if displayThis}
-      {displayThis}
+      {@html displayThis}
     {/if}
   </span>
 </div>
 
 <style>
+  span.letter {
+    color: #5800ff;
+  }
   #ball {
     width: 600px;
     height: 600px;
@@ -53,4 +56,5 @@
     font-size: 300px;
     text-align: center;
   }
+  
 </style>
