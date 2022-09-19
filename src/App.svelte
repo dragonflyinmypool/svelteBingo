@@ -3,6 +3,7 @@
   // ***SETTINGS***
   let settings = {
     mainPage: 'main',
+    showNumbers:false,
     numberOfBalls: 75,
     showLetter: true,
     repeatCall: false,
@@ -10,6 +11,8 @@
     autoCallBalls: false,
     speedOfAutoCall: 10,
   }
+
+  $: settings.mainPage = settings.showNumbers ? 'maintogether' : 'main'
 
   // ***PAGES***
   import PickedBalls from "./pages/PickedBalls.svelte";
@@ -23,8 +26,6 @@
   function changePage(page) {
     currentPage = page;
   }
-
-
 
   // ***GAME SETUP***
   let allBalls = Array.from({ length: 75 }, (_, i) => i + 1);
@@ -82,8 +83,9 @@
     />
 
   {:else if currentPage == 'settings'}
-    <Settings 
-      on:click={()=>changePage(settings.mainPage)} 
+    <Settings
+      {settings}
+      on:click={()=>changePage(settings.mainPage)}
     />
   {/if}
 
