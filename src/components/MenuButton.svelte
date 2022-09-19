@@ -8,7 +8,7 @@
 
 <style>
   button {
-    margin-top: 10px;
-    width: 270px;
+    margin: 0px 10px;
+    width: 200px;
   }
 </style>

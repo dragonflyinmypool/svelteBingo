@@ -1,5 +1,3 @@
-
-  
 <script>
   import MenuButton from "../components/MenuButton.svelte";
  
@@ -11,7 +9,6 @@
   export let showSettings
   export let repeatCall
   export let settings
-
 </script>
 
 <div id="menuBar">
@@ -21,8 +18,16 @@
   {#if unpickedballs.length > 0}
     <MenuButton on:click={nextBall} message='Next Ball' reference='nextBall' />
   {/if}
+
   {#if !settings.showNumbers}
   <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton'/>
   {/if}
+
   <MenuButton on:click={showSettings} message='Settings' reference='settingsButton'/>
 </div>
+
+<style>
+ MenuButton {
+    margin: 10px 100px;
+  }
+</style>
