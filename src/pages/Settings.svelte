@@ -84,11 +84,13 @@
 <style>
 	main {
 		display: grid;
-		grid-template-columns: 500px 200px 300px 400px 300px;
+		grid-template-columns: 400px 300px 300px 400px 300px;
 		grid-template-rows: 150px 150px 150px 150px 150px;
+		align-items: center;
 	}
 	.checkbox {
-		height: 100px;
+		height: 100px  !important;
+		width: 100px  !important;
 	}
 	label {
 		display: flex;
