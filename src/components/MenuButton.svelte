@@ -6,8 +6,6 @@
 
 <button on:click id={reference}>{message}</button>
 
-
-
 <style>
   button {
     margin-top: 10px;

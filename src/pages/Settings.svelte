@@ -1,5 +1,3 @@
-
-
 <script>
   import MenuButton from "../components/MenuButton.svelte";
   export let settings
@@ -87,6 +85,7 @@
 		grid-template-columns: 400px 300px 300px 400px 300px;
 		grid-template-rows: 150px 150px 150px 150px 150px;
 		align-items: center;
+		justify-items: center;
 	}
 	.checkbox {
 		height: 100px  !important;

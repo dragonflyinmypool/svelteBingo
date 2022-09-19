@@ -51,6 +51,7 @@
       return !unpickedballs.includes(ball)
     })
   } 
+
   function repeatCall() {
     console.log('Repeat call')
   }
@@ -64,10 +65,10 @@
       {newGame} 
       {nextBall}
       {repeatCall}
+      {settings}
       showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
-
   {:else if currentPage == 'maintogether'}
     <MainTogether 
       {allBalls} 
@@ -77,23 +78,22 @@
       {newGame} 
       {nextBall}
       {repeatCall}
+      {settings}
+      showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
-  
   {:else if currentPage == 'ballview'}
     <PickedBalls 
       {allBalls} 
       {pickedBalls} 
       on:click={()=>changePage(settings.mainPage)}
     />
-
   {:else if currentPage == 'settings'}
     <Settings
       {settings}
       on:click={()=>changePage(settings.mainPage)}
     />
   {/if}
-
 </main>
 
 <style>

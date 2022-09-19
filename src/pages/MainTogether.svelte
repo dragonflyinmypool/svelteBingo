@@ -1,6 +1,6 @@
 <script>
   import BallDisplay from "../components/BallDisplay.svelte";
-  import MenuButton from "../components/MenuButton.svelte";
+  import MenuBar from "../components/MenuBar.svelte";
 
   export let currentBall
   export let unpickedballs
@@ -10,6 +10,8 @@
   export let allBalls
   export let pickedBalls
   export let repeatCall
+  export let settings
+  export let showPickedBalls
 </script>
 
 
@@ -25,19 +27,19 @@
       </div>
     {/each}
   </div>
-
 </div>
 
 
-<div id="menuBar">
-  <MenuButton on:click={newGame} message='New Game' reference='newGameButton'/>
-  <MenuButton on:click={repeatCall} message='Reapeat Ball' reference='repeatBall'/>
-
-  {#if unpickedballs.length > 0}
-    <MenuButton on:click={nextBall} message='Next Ball' reference='nextBall' />
-  {/if}
-  <MenuButton on:click={showSettings} message='Settings' reference='settingsButton'/>
-</div>
+<MenuBar 
+  {currentBall} 
+  {unpickedballs} 
+  {newGame} 
+  {nextBall}
+  {repeatCall}
+  {showPickedBalls}
+  {showSettings}
+  {settings}
+/>
 
 <style>
   #mainContent {
