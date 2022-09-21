@@ -7,7 +7,7 @@
     numberOfBalls: 100,
     showLetter: true,
     repeatCall: false,
-    callLanguages: [],
+    callLanguage: 'Spanish',
     autoCallBalls: false,
     speedOfAutoCall: 10,
   }
@@ -19,6 +19,8 @@
   import Main from "./pages/Main.svelte";
   import MainTogether from "./pages/MainTogether.svelte";
   import Settings from "./pages/Settings.svelte";
+  import AudioCaller from "./components/AudioCaller.svelte";
+
 
   let pages = ['main','maintogether', 'ballview', 'settings']
   let currentPage = settings.mainPage
@@ -32,6 +34,8 @@
   let pickedBalls;
   let currentBall;
   let unpickedballs;
+  let callBall;
+
   newGame()
 
   // ***NEW GAME***
@@ -51,10 +55,12 @@
     pickedBalls = allBalls.filter((ball) =>{
       return !unpickedballs.includes(ball)
     })
+
+    callBall(currentBall)
   } 
 
   function repeatCall() {
-    console.log('Repeat call')
+    callBall(currentBall)
   }
 </script>
 
@@ -96,6 +102,9 @@
       on:click={()=>changePage(settings.mainPage)}
     />
   {/if}
+
+  <AudioCaller {settings} {currentBall} bind:callBall={callBall}/>
+
 </main>
 
 <style>
