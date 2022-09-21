@@ -5,7 +5,7 @@
 	let audio = new Audio ();
 	
 	export function callBall (currentBall) {
-			audio.src = 'src/assets/' + settings.callLanguage + '/'+ currentBall + '.ogg';
+			audio.src = 'src/assets/' + settings.call[0] + '/'+ currentBall + '.ogg';
 				audio.play();
 		}
 </script>

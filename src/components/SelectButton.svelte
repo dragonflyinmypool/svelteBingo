@@ -11,12 +11,12 @@
 </script>
 
 
-<label for="withBallDisplay" id="label"> 
+<label for="withBallDisplay" id="label" style='grid-area:R1L1' > 
 	<span>Number of balls</span>
 </label>
 	
-<div class="select">
-  <select value={currentSetting} on:change="{switchSetting}">
+<div class="select" style='grid-area:R1B1' >
+  <select bind:value={currentSetting} on:change="{switchSetting}">
 		{#each options as option}
 			<option value={option}>
 				{option}

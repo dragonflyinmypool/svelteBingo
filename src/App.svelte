@@ -1,17 +1,20 @@
 <script>
 
   // ***SETTINGS***
+  let call1 = 'Spanish'
+  let call2 = ''
+  let call3 = ''
+
   let settings = {
     mainPage: 'main',
     showNumbers:false,
     numberOfBalls: 100,
     showLetter: true,
     repeatCall: false,
-    callLanguage: 'Spanish',
-    autoCallBalls: false,
-    speedOfAutoCall: 10,
-  }
+    call: [call1,call2,call3],
+    }
 
+  let languagesAvailable = ['Chinese', 'English', 'French', 'German', "Spanish"]
   $: settings.mainPage = settings.showNumbers ? 'maintogether' : 'main'
 
   // ***PAGES***
@@ -20,7 +23,6 @@
   import MainTogether from "./pages/MainTogether.svelte";
   import Settings from "./pages/Settings.svelte";
   import AudioCaller from "./components/AudioCaller.svelte";
-
 
   let pages = ['main','maintogether', 'ballview', 'settings']
   let currentPage = settings.mainPage
@@ -62,6 +64,15 @@
   function repeatCall() {
     callBall(currentBall)
   }
+
+  function changeLang(e) {
+    settings.call[0] = e.detail
+  }
+
+  function chnageSettings(e) {
+    settings = e.detail
+  }
+
 </script>
 
 <main>
@@ -99,12 +110,13 @@
     <Settings
       {settings}
       {newGame}
+      {languagesAvailable}
       on:click={()=>changePage(settings.mainPage)}
+      {changeLang}
     />
   {/if}
 
   <AudioCaller {settings} {currentBall} bind:callBall={callBall}/>
-
 </main>
 
 <style>
