@@ -21,7 +21,6 @@
 </div>
 
 <MenuBar 
-  {currentBall} 
   {unpickedballs} 
   {newGame} 
   {nextBall}

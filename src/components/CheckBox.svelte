@@ -1,17 +1,31 @@
 
 
 <script>
-	export let check
+	import {createEventDispatcher} from 'svelte'
+	let dispatch = createEventDispatcher()
+
+	export let currentSetting
 	export let label
 	export let gridLabel
 	export let gridButton
+	export let settingToBeChanged
+	export let startNewGame
+
+	function changeSettings(e) {
+		let newSettingObject = {
+			setting: settingToBeChanged,
+			value: e.target.checked,
+			newGame: startNewGame
+		}
+		dispatch('changeSettings', newSettingObject)
+	}
 </script>
 
 
 <label style:grid-area={gridLabel} id="label"> 
 	<span>{label}</span>
 	</label>
-<input  style:grid-area={gridButton}  type="checkbox"  bind:checked={check}>
+<input  style:grid-area={gridButton}  type="checkbox"  checked={currentSetting} on:click={changeSettings}>
 
 
 <style>

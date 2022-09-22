@@ -2,29 +2,35 @@
 
   // ***SETTINGS***
   let settings = {
-    mainPage: 'main',
+    showNumberOnMain: false,
     showNumbers:false,
     ballNumbers:[30,75,80,90,100],
     numberOfBalls: 100,
     showLetter: true,
     repeatCall: false,
     languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
-    lang1: 'Spanish',
+    lang1: 'None',
+    lang2: 'None',
+    lang3: 'None',
     }
 
-  $: settings.mainPage = settings.showNumbers ? 'maintogether' : 'main'
-
   // ***PAGES***
-  import PickedBalls from "./pages/PickedBalls.svelte";
-  import Main from "./pages/Main.svelte";
+  import MainWithout from "./pages/MainWithout.svelte";
   import MainTogether from "./pages/MainTogether.svelte";
   import Settings from "./pages/Settings.svelte";
+  import PickedBalls from "./pages/PickedBalls.svelte";
   import AudioCaller from "./components/AudioCaller.svelte";
 
-  let pages = ['main','maintogether', 'ballview', 'settings']
-  let currentPage = settings.mainPage
+  let currentPage = 'MainWithout'
 
   function changePage(page) {
+
+    if (page == 'main' && !settings.showNumberOnMain) {
+      page = 'MainWithout'
+    } else if(page == 'main' && settings.showNumberOnMain) {
+      page = 'MainTogether'
+    }
+
     currentPage = page;
   }
 
@@ -64,8 +70,8 @@
 </script>
 
 <main>
-  {#if currentPage == 'main'}
-    <Main 
+  {#if currentPage == 'MainWithout'}
+    <MainWithout 
       {currentBall} 
       {unpickedballs} 
       {newGame} 
@@ -75,7 +81,7 @@
       showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
-  {:else if currentPage == 'maintogether'}
+  {:else if currentPage == 'MainTogether'}
     <MainTogether 
       {allBalls} 
       {pickedBalls} 
@@ -92,13 +98,13 @@
     <PickedBalls 
       {allBalls} 
       {pickedBalls} 
-      on:click={()=>changePage(settings.mainPage)}
+      on:click={()=>changePage('main')}
     />
   {:else if currentPage == 'settings'}
     <Settings
       {settings}
       {newGame}
-      on:click={()=>changePage(settings.mainPage)}
+      on:click={()=>changePage('main')}
     />
 
   {/if}
