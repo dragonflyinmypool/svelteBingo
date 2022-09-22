@@ -18,7 +18,6 @@
 		}
 		dispatch('changeSettings', newSettingObject)
 	}
-	console.log(currentLanguage)
 </script>
 
 <label style:grid-area={gridLabel} for='withBallDisplay' id='label' > 

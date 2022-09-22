@@ -24,13 +24,11 @@
   let currentPage = 'MainWithout'
 
   function changePage(page) {
-
     if (page == 'main' && !settings.showNumberOnMain) {
       page = 'MainWithout'
     } else if(page == 'main' && settings.showNumberOnMain) {
       page = 'MainTogether'
     }
-
     currentPage = page;
   }
 
@@ -106,7 +104,6 @@
       {newGame}
       on:click={()=>changePage('main')}
     />
-
   {/if}
 
   <AudioCaller {settings} {currentBall} bind:callBall={callBall}/>

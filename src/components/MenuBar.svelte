@@ -18,7 +18,7 @@
     <MenuButton on:click={nextBall} message='Next Ball' reference='nextBall' />
   {/if}
 
-  {#if !settings.showNumbers}
+  {#if !settings.showNumberOnMain}
   <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton'/>
   {/if}
 

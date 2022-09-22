@@ -1,5 +1,5 @@
 <script>
-  import SelectButton2 from "../components/SelectButton2.svelte";
+  import SelectButton from "../components/SelectButton.svelte";
   import CheckBox from "../components/CheckBox.svelte";
   import MenuButton from "../components/MenuButton.svelte";
 
@@ -24,7 +24,7 @@
 <main>
 	<!-- ROW 1  -->
 	<!-- Number of balls -->
-	<SelectButton2
+	<SelectButton
 	options={settings.ballNumbers} 
 	currentLanguage={settings.numberOfBalls}
 	startNewGame = true 
@@ -33,48 +33,6 @@
 	text='Number of ball' 
 	gridLabel='R1L1' 
 	gridButton='R1B1' />
-
-	<SelectButton2
-	options={settings.ballNumbers} 
-	currentLanguage={settings.numberOfBalls}
-	startNewGame = true 
-	settingToBeChanged="numberOfBalls"
-	on:changeSettings={changeSettings} 
-	text='Number of ball' 
-	gridLabel='R1L1' 
-	gridButton='R1B1' />	
-
-	<SelectButton2
-	options={settings.ballNumbers} 
-	currentLanguage={settings.numberOfBalls}
-	startNewGame = true 
-	settingToBeChanged="numberOfBalls"
-	on:changeSettings={changeSettings} 
-	text='Number of ball' 
-	gridLabel='R1L1' 
-	gridButton='R1B1' />	
-
-	<!-- Reapeat each ball -->
-	<CheckBox
-	currentSetting={settings.repeatCall}
-	startNewGame = false
-	settingToBeChanged="repeatCall" 
-	on:changeSettings={changeSettings} 
-	label='Repeat call' 
-	gridLabel='R2L4' 
-	gridButton='R2B4' />
-
-	<!-- ROW 2 -->
-	<!-- Change language -->
-	<SelectButton2
-	options={settings.languagesAvailable} 
-	currentLanguage={settings.lang1} 
-	settingToBeChanged="lang1"
-	on:changeSettings={changeSettings} 
-	text='Voice caller 1' 
-	gridLabel='R2L1' 
-	gridButton='R2B1' 
-	startNewGame = false />
 
 	<!-- Show called -->
 	<CheckBox
@@ -85,6 +43,48 @@
 	label='Show called balls on main screen' 
 	gridLabel='R1L2' 
 	gridButton='R1B2' />	
+
+	<!-- ROW 2 -->
+	<!-- Change language -->
+	<SelectButton
+	options={settings.languagesAvailable} 
+	currentLanguage={settings.lang1} 
+	settingToBeChanged="lang1"
+	on:changeSettings={changeSettings} 
+	text='Voice caller 1' 
+	gridLabel='R2L1' 
+	gridButton='R2B1' 
+	startNewGame = false />
+	
+	<SelectButton
+	options={settings.languagesAvailable} 
+	currentLanguage={settings.lang2} 
+	settingToBeChanged="lang2"
+	on:changeSettings={changeSettings} 
+	text='Voice caller 2' 
+	gridLabel='R2L2' 
+	gridButton='R2B2' 
+	startNewGame = false />
+
+	<SelectButton
+	options={settings.languagesAvailable} 
+	currentLanguage={settings.lang3} 
+	settingToBeChanged="lang3"
+	on:changeSettings={changeSettings} 
+	text='Voice caller 3' 
+	gridLabel='R2L3' 
+	gridButton='R2B3' 
+	startNewGame = false />
+
+	<!-- Reapeat each ball -->
+	<CheckBox
+	currentSetting={settings.repeatCall}
+	startNewGame = false
+	settingToBeChanged="repeatCall" 
+	on:changeSettings={changeSettings} 
+	label='Repeat call' 
+	gridLabel='R2L4' 
+	gridButton='R2B4' />	
 </main>
 
 <MenuButton on:click message='Back' reference='nextBall' />
