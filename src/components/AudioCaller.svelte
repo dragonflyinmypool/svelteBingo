@@ -21,13 +21,11 @@
 		}
 
 		let arrayOfLanguages = checkSettings()
-		console.log(arrayOfLanguages)
 
 		if(arrayOfLanguages.length > 0) {	
 			audio.src = 'src/assets/' + settings.lang1 + '/'+ currentBall + '.ogg';
 			audio.play();
 			if (settings.repeatCall) {
-				console.log(currentBall)
 			}	
 		}
 	}

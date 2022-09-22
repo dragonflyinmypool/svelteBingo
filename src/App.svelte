@@ -2,10 +2,10 @@
 
   // ***SETTINGS***
   let settings = {
-    showNumberOnMain: false,
+    showNumberOnMain: true,
     showNumbers:false,
     ballNumbers:[30,75,80,90,100],
-    numberOfBalls: 100,
+    numberOfBalls: 75,
     showLetter: true,
     repeatCall: false,
     languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
@@ -21,7 +21,7 @@
   import PickedBalls from "./pages/PickedBalls.svelte";
   import AudioCaller from "./components/AudioCaller.svelte";
 
-  let currentPage = 'MainWithout'
+  let currentPage = 'MainTogether'
 
   function changePage(page) {
     if (page == 'main' && !settings.showNumberOnMain) {
@@ -38,6 +38,7 @@
   let currentBall;
   let unpickedballs;
   let callBall;
+  let currentLetter = 'false';
 
   newGame()
 
@@ -59,8 +60,17 @@
       return !unpickedballs.includes(ball)
     })
 
+    function sendLetter() {
+      if (settings.numberOfBalls == 75) {
+         return addLetter(currentBall)
+      } else {
+        return 'false'
+      }
+    }
+    currentLetter = sendLetter()
 
-    callBall(currentBall)
+   callBall(currentBall)
+    
   }
 
   function addLetter(currentBall) {
@@ -71,24 +81,24 @@
         withLetter = '';
         break; 
       case currentBall <= 15:
-        withLetter = '<span class="letter" style="color:#5800ff">B</span>' + currentBall;
+        withLetter = 'B';
         break;
       case currentBall <= 30:
-        withLetter = '<span class="letter" style="color:#5800ff">I</span>' + currentBall;
+        withLetter = 'I';
         break;
       case currentBall <= 45:
-        withLetter = '<span class="letter" style="color:#5800ff">N</span>' + currentBall;
+        withLetter = 'N';
         break;
       case currentBall <= 60:
-        withLetter ='<span class="letter" style="color:#5800ff">G</span>' + currentBall;
+        withLetter = 'G';
         break;  
       default:
-      withLetter = '<span class="letter" style="color:#5800ff">O</span>' + currentBall;
+      withLetter = 'O';
   } 
     return withLetter
   }
 
-  $: displayThis = settings.numberOfBalls == 75 ? addLetter(currentBall) : currentBall 
+  // $: displayThis = settings.numberOfBalls == 75 ? addLetter(currentBall) : currentBall 
 
 
 
@@ -106,13 +116,13 @@
       {nextBall}
       {repeatCall}
       {settings}
-      {displayThis}
+      {currentLetter}
       showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
   {:else if currentPage == 'MainTogether'}
     <MainTogether
-      {displayThis} 
+      {currentLetter} 
       {allBalls} 
       {pickedBalls} 
       {currentBall} 

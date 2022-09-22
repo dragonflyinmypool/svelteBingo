@@ -1,17 +1,18 @@
 <script>
-export let displayThis;
-export let settings;
-
-
-  
+  export let currentBall;
+  export let currentLetter;
+  export let settings;
 </script>
 
 <div id="ball">
-  <span id="ballNumber">
-    {#if displayThis}
-      {@html displayThis}
-    {/if}
-  </span>
+  {#if currentBall}
+    <span id="ballNumber">
+      {#if currentLetter !== 'false'}
+        <span class="letter" style="color:#5800ff"> {currentLetter}</span>
+      {/if}
+      {currentBall}
+    </span>
+  {/if}
 </div>
 
 <style>
@@ -31,6 +32,8 @@ export let settings;
     top: 300px;
     font-size: 300px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
 </style>
