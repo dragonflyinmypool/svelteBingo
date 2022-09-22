@@ -14,7 +14,6 @@
 <BallDisplay {currentBall} {settings} />
 
 <MenuBar 
-  {currentBall} 
   {unpickedballs} 
   {newGame} 
   {nextBall}

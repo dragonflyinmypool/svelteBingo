@@ -1,20 +1,17 @@
 <script>
 
   // ***SETTINGS***
-  let call1 = 'Spanish'
-  let call2 = ''
-  let call3 = ''
-
   let settings = {
     mainPage: 'main',
     showNumbers:false,
+    ballNumbers:[30,75,80,90,100],
     numberOfBalls: 100,
     showLetter: true,
     repeatCall: false,
-    call: [call1,call2,call3],
+    languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
+    lang1: 'Spanish',
     }
 
-  let languagesAvailable = ['Chinese', 'English', 'French', 'German', "Spanish"]
   $: settings.mainPage = settings.showNumbers ? 'maintogether' : 'main'
 
   // ***PAGES***
@@ -64,15 +61,6 @@
   function repeatCall() {
     callBall(currentBall)
   }
-
-  function changeLang(e) {
-    settings.call[0] = e.detail
-  }
-
-  function chnageSettings(e) {
-    settings = e.detail
-  }
-
 </script>
 
 <main>
@@ -110,10 +98,9 @@
     <Settings
       {settings}
       {newGame}
-      {languagesAvailable}
       on:click={()=>changePage(settings.mainPage)}
-      {changeLang}
     />
+
   {/if}
 
   <AudioCaller {settings} {currentBall} bind:callBall={callBall}/>

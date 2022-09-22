@@ -3,26 +3,30 @@
 	let dispatch = createEventDispatcher()
 
 	export let options
+	export let currentLanguage
+	export let settingToBeChanged
+	export let startNewGame
 	export let text
 	export let gridLabel
 	export let gridButton
-	export let currentLanguage
 
-	let displayOptions 
-	displayOptions = ['None', ...options]
-
-	function changeLang(e) {
-		let newLang = e.target.value
-		dispatch('changeLang', newLang)
+	function changeSettings(e) {
+		let newSettingObject = {
+			setting: settingToBeChanged,
+			value: e.target.value,
+			newGame: startNewGame
 		}
+		dispatch('changeSettings', newSettingObject)
+	}
+	console.log(currentLanguage)
 </script>
 
-<label style='grid-area:{gridLabel}' for='withBallDisplay' id='label' > 
+<label style:grid-area={gridLabel} for='withBallDisplay' id='label' > 
 	<span>{text}</span>
 </label>
-<div class='select' style='grid-area:{gridButton}' on:change={changeLang} >
+<div class='select' style:grid-area={gridButton} on:change={changeSettings} >
   <select value={currentLanguage}>
-		{#each displayOptions as option}
+		{#each options as option}
 			<option value={option}>
 				{option}
 			</option>
@@ -35,6 +39,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		line-height: 40px;
 	}
 	select {
 		width: 250px;

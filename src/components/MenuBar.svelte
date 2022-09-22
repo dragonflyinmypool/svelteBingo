@@ -1,7 +1,6 @@
 <script>
   import MenuButton from "../components/MenuButton.svelte";
  
-  export let currentBall
   export let unpickedballs
   export let newGame
   export let nextBall
