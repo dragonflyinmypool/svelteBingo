@@ -9,9 +9,11 @@
   export let showSettings
   export let repeatCall
   export let settings
+  export let displayThis
+
 </script>
 
-<BallDisplay {currentBall} {settings} />
+<BallDisplay {displayThis} {settings} />
 
 <MenuBar 
   {unpickedballs} 

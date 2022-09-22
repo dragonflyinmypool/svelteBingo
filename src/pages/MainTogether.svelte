@@ -13,10 +13,11 @@
   export let repeatCall
   export let settings
   export let showPickedBalls
+  export let displayThis
 </script>
 
 <div id="mainContent">
-  <BallDisplay {currentBall} {settings}/>
+  <BallDisplay {displayThis} {settings}/>
   <PickedBallDisplay {allBalls} {pickedBalls} />
 </div>
 

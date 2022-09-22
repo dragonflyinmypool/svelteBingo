@@ -59,8 +59,38 @@
       return !unpickedballs.includes(ball)
     })
 
+
     callBall(currentBall)
+  }
+
+  function addLetter(currentBall) {
+    let withLetter
+
+    switch (true) {
+      case currentBall == undefined:
+        withLetter = '';
+        break; 
+      case currentBall <= 15:
+        withLetter = '<span class="letter" style="color:#5800ff">B</span>' + currentBall;
+        break;
+      case currentBall <= 30:
+        withLetter = '<span class="letter" style="color:#5800ff">I</span>' + currentBall;
+        break;
+      case currentBall <= 45:
+        withLetter = '<span class="letter" style="color:#5800ff">N</span>' + currentBall;
+        break;
+      case currentBall <= 60:
+        withLetter ='<span class="letter" style="color:#5800ff">G</span>' + currentBall;
+        break;  
+      default:
+      withLetter = '<span class="letter" style="color:#5800ff">O</span>' + currentBall;
   } 
+    return withLetter
+  }
+
+  $: displayThis = settings.numberOfBalls == 75 ? addLetter(currentBall) : currentBall 
+
+
 
   function repeatCall() {
     callBall(currentBall)
@@ -76,11 +106,13 @@
       {nextBall}
       {repeatCall}
       {settings}
+      {displayThis}
       showPickedBalls={()=>changePage('ballview')}
       showSettings={()=>changePage('settings')}
     />
   {:else if currentPage == 'MainTogether'}
-    <MainTogether 
+    <MainTogether
+      {displayThis} 
       {allBalls} 
       {pickedBalls} 
       {currentBall} 

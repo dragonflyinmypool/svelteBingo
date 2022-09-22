@@ -7,7 +7,7 @@
   export let newGame
 
   function changeSettings(e) {
-  	let input = e.detail.value 
+  	let input = e.detail.value
  	
     if(typeof settings[e.detail.setting] == 'number'){
     	input =	Number(input)
