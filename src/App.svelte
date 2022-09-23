@@ -8,7 +8,7 @@
     numberOfBalls: 75,
     showLetter: true,
     repeatCall: true,
-    languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
+    languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish", "Italian"],
     lang1: 'English',
     lang2: 'None',
     lang3: 'None',

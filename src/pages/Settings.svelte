@@ -19,6 +19,8 @@
   		newGame()
   	}
   }
+
+	
 </script>
 
 <main>
@@ -87,7 +89,7 @@
 	gridButton='R2B4' />	
 </main>
 
-<MenuButton on:click message='Back' reference='nextBall' />
+<MenuButton on:click message='Back' reference='nextBall' focus=true />
 
 <style>
 	main {

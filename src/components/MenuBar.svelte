@@ -11,18 +11,18 @@
 </script>
 
 <div id="menuBar">
-  <MenuButton on:click={newGame} message='New Game' reference='newGameButton'/>
-  <MenuButton on:click={repeatCall} message='Reapeat Ball' reference='repeatBall'/>
+  <MenuButton on:click={newGame} message='New Game' reference='newGameButton' focus='false' />
+  <MenuButton on:click={repeatCall} message='Reapeat Ball' reference='repeatBall' focus='false' />
 
   {#if unpickedballs.length > 0}
-    <MenuButton on:click={nextBall} message='Next Ball' reference='nextBall' />
+    <MenuButton  on:click={nextBall} message='Next Ball' reference='nextBall' focus='true' />
   {/if}
 
   {#if !settings.showNumberOnMain}
-  <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton'/>
+  <MenuButton on:click={showPickedBalls} message='Show picked balls' reference='pickedBallsButton' focus= 'false' />
   {/if}
 
-  <MenuButton on:click={showSettings} message='Settings' reference='settingsButton'/>
+  <MenuButton on:click={showSettings} message='Settings' reference='settingsButton' focus= 'false' />
 </div>
 
 <style>
