@@ -9,7 +9,7 @@
     showLetter: true,
     repeatCall: false,
     languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
-    lang1: 'None',
+    lang1: 'English',
     lang2: 'None',
     lang3: 'None',
     }
@@ -98,13 +98,69 @@
     return withLetter
   }
 
-  // $: displayThis = settings.numberOfBalls == 75 ? addLetter(currentBall) : currentBall 
-
-
-
   function repeatCall() {
-    callBall(currentBall)
+    callBall(currentBall, currentLetter)
   }
+
+  // Call ball
+  function callBall (currentBall, currentLetter) {
+    let audio = new Audio ();
+
+    let timing = 0;
+
+
+    // Make an array with all the languages to be called
+    function checkSettings (){
+      let arrayOfLanguages = []
+      if (settings.lang1 !== 'None') {
+        arrayOfLanguages.push(settings.lang1)
+      }
+      if (settings.lang2 !== 'None') {
+        arrayOfLanguages.push(settings.lang2)
+      }
+      if (settings.lang3 !== 'None') {
+        arrayOfLanguages.push(settings.lang3)
+      }
+      return arrayOfLanguages
+    }
+    let arrayOfLanguages = checkSettings()
+
+    
+    // Create a que of all calls to be said including: whatToSay and lang
+    // [[whatToSay, lang],[whatToSay, lang],[whatToSay, lang]]
+    let callList = arrayOfLanguages.map(myFunction)
+    
+    function myFunction(lang) {   
+      console.log(currentBall, currentLetter)
+      return [currentBall, lang]
+    }
+  
+    executeQueOfCalls()
+  
+    // GO through the call list, send to the timer
+    function executeQueOfCalls (){
+      for (var i = 0; i < callList.length; i++) {
+        sendTheCallsWith(callList[i])
+      }
+    }
+
+    // Send the calls to the caller with a timer
+    function sendTheCallsWith(call) {
+        setTimeout(() => {
+          theCaller(call[0], call[1]);
+        }, timing);
+      timing = timing + 2500
+    }
+
+    //Call the calls 
+    function theCaller (whatToSay, lang){
+      console.log(whatToSay, lang)
+      audio.src = 'src/assets/' + lang + '/'+ whatToSay + '.ogg';
+      audio.play();
+    }
+  }
+
+
 </script>
 
 <main>
@@ -147,8 +203,6 @@
       on:click={()=>changePage('main')}
     />
   {/if}
-
-  <AudioCaller {settings} {currentBall} bind:callBall={callBall}/>
 </main>
 
 <style>
