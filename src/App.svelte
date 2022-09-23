@@ -7,7 +7,7 @@
     ballNumbers:[30,75,80,90,100],
     numberOfBalls: 75,
     showLetter: true,
-    repeatCall: false,
+    repeatCall: true,
     languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish"],
     lang1: 'English',
     lang2: 'None',
@@ -19,7 +19,6 @@
   import MainTogether from "./pages/MainTogether.svelte";
   import Settings from "./pages/Settings.svelte";
   import PickedBalls from "./pages/PickedBalls.svelte";
-  import AudioCaller from "./components/AudioCaller.svelte";
 
   let currentPage = 'MainTogether'
 
@@ -37,7 +36,6 @@
   let pickedBalls;
   let currentBall;
   let unpickedballs;
-  let callBall;
   let currentLetter = 'false';
 
   newGame()
@@ -49,6 +47,7 @@
     currentBall = undefined
     pickedBalls = []
   }
+
 
   // ***GAME PLAY***
   function nextBall(event) {
@@ -69,7 +68,7 @@
     }
     currentLetter = sendLetter()
 
-   callBall(currentBall)
+   callBall(currentBall, currentLetter)
     
   }
 
@@ -102,12 +101,12 @@
     callBall(currentBall, currentLetter)
   }
 
-  // Call ball
+  // 
+  // CALL BALLS
+  // 
   function callBall (currentBall, currentLetter) {
     let audio = new Audio ();
-
     let timing = 0;
-
 
     // Make an array with all the languages to be called
     function checkSettings (){
@@ -128,17 +127,31 @@
     
     // Create a que of all calls to be said including: whatToSay and lang
     // [[whatToSay, lang],[whatToSay, lang],[whatToSay, lang]]
-    let callList = arrayOfLanguages.map(myFunction)
+    let callList = []
+
+    for (var i = 0; i < arrayOfLanguages.length; i++) {
     
-    function myFunction(lang) {   
-      console.log(currentBall, currentLetter)
-      return [currentBall, lang]
+       if (currentLetter !== 'false') {
+        callList.push([currentLetter, arrayOfLanguages[i]])
+      }
+        callList.push([currentBall, arrayOfLanguages[i]])
+
+      if (settings.repeatCall) {
+        if (currentLetter !== 'false') {
+        callList.push([currentLetter, arrayOfLanguages[i]])
+      }
+        callList.push([currentBall, arrayOfLanguages[i]])
+
+        
+      }
+
     }
-  
+    
     executeQueOfCalls()
   
     // GO through the call list, send to the timer
     function executeQueOfCalls (){
+      console.log(callList)
       for (var i = 0; i < callList.length; i++) {
         sendTheCallsWith(callList[i])
       }
@@ -149,18 +162,15 @@
         setTimeout(() => {
           theCaller(call[0], call[1]);
         }, timing);
-      timing = timing + 2500
+      timing = timing + 2000
     }
 
     //Call the calls 
     function theCaller (whatToSay, lang){
-      console.log(whatToSay, lang)
       audio.src = 'src/assets/' + lang + '/'+ whatToSay + '.ogg';
       audio.play();
     }
   }
-
-
 </script>
 
 <main>
