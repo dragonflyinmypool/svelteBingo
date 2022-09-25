@@ -87,7 +87,7 @@
 	gridButton='R2B4' />	
 </main>
 
-<MenuButton on:click message='Back' reference='nextBall' focus=true />
+<MenuButton on:click reference='nextBall' focus=true>Back</MenuButton>
 
 <style>
 	main {

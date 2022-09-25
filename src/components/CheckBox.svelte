@@ -1,5 +1,3 @@
-
-
 <script>
 	import {createEventDispatcher} from 'svelte'
 	let dispatch = createEventDispatcher()
@@ -20,7 +18,6 @@
 		dispatch('changeSettings', newSettingObject)
 	}
 </script>
-
 
 <label style:grid-area={gridLabel} id="label"> 
 	<span>{label}</span>

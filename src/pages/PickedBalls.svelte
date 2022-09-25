@@ -1,15 +1,15 @@
 <script>
   import PickedBallDisplay from "../components/PickedBallDisplay.svelte";
+  import MenuButton from "../components/MenuButton.svelte";
+
   export let pickedBalls;
   export let allBalls;
-
-  import { onMount } from 'svelte'
-  let defaultButton
-  onMount(() => defaultButton.focus())
 </script>
 
 <PickedBallDisplay {allBalls} {pickedBalls} />
-<button bind:this={defaultButton} on:click id="button">Back</button>
+<!-- <button bind:this={defaultButton} on:click id="button">Back</button>
+ -->
+<MenuButton on:click reference='nextBall' focus=true>Back</MenuButton>
 
 <style>
   button {
