@@ -7,9 +7,9 @@
     ballNumbers:[30,75,80,90,100],
     numberOfBalls: 75,
     showLetter: true,
-    repeatCall: true,
+    repeatCall: false,
     languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish", "Italian"],
-    lang1: 'English',
+    lang1: 'None',
     lang2: 'None',
     lang3: 'None',
     }
@@ -151,7 +151,6 @@
   
     // GO through the call list, send to the timer
     function executeQueOfCalls (){
-      console.log(callList)
       for (var i = 0; i < callList.length; i++) {
         sendTheCallsWith(callList[i])
       }
@@ -218,9 +217,9 @@
 <style>
   main {
     font-weight: bold;
-    width: 1700px;
+    width: 1800px;
     display: grid;
-    grid-template-rows:950px 100px;
+    grid-template-rows:875px 125px;
     justify-items: center;
     align-items: center;
   }

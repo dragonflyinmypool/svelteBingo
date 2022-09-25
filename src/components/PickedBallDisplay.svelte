@@ -15,7 +15,7 @@
   #ballContainer {
     display: grid;
     grid-template-columns: repeat(10, 90px);
-    grid-template-rows: repeat(8, 80px);
+    grid-template-rows: repeat(10, 80px);
     justify-items: center;
     align-items: center;
 

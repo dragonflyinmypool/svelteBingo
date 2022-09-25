@@ -20,8 +20,8 @@
     color: #5800ff;
   }
   #ball {
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     background: #fbe3ff;
     color:#0f1152;
     border-radius: 50%;
@@ -29,8 +29,8 @@
   }
   #ballNumber {
     position: relative;
-    top: 300px;
-    font-size: 300px;
+    top: 350px;
+    font-size: 370px;
     text-align: center;
     display: flex;
     align-items: center;
