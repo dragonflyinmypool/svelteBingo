@@ -166,7 +166,7 @@
 
     //Call the calls 
     function theCaller (whatToSay, lang){
-      audio.src = 'src/assets/' + lang + '/'+ whatToSay + '.ogg';
+      audio.src = '/assets/' + lang + '/'+ whatToSay + '.ogg';
       audio.play();
     }
   }

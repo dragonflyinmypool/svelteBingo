@@ -5,32 +5,41 @@
 </script>
 
 <div id="ball">
-  {#if currentBall}
+  {#if currentBall && currentLetter !== 'false'}
+    <span id="verticalBall">
+       <div><span class="letter letterVertical"> {currentLetter}</span></div>
+      <div>{currentBall}</div>
+    </span>
+
+    {:else if currentBall && currentLetter == 'false'}
     <span id="ballNumber">
-      {#if currentLetter !== 'false'}
-        <span class="letter" style="color:#5800ff"> {currentLetter}</span>
-      {/if}
-      {currentBall}
+      <div>{currentBall}</div>
     </span>
   {/if}
 </div>
 
 <style>
-  span.letter {
-    color: #5800ff;
-  }
   #ball {
-    width: 700px;
-    height: 700px;
-    background: #fbe3ff;
-    color:#0f1152;
+    width: 800px;
+    height: 800px;
     border-radius: 50%;
     display: inline-block;
   }
+  #verticalBall {
+    position: relative;
+    top: 75px;
+    font-size: 500px;
+    display: grid;
+    grid-template-rows: 400px
+  }
+  .letterVertical{
+    font-size: 250px;
+  }
+
   #ballNumber {
     position: relative;
-    top: 350px;
-    font-size: 370px;
+    top: 400px;
+    font-size: 475px;
     text-align: center;
     display: flex;
     align-items: center;

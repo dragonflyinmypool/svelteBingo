@@ -26,14 +26,7 @@
     border-radius: 50%;
     display: inline-block;
   }
-  .inactive{
-    background: grey;
-    color:grey;
-  }
-  .active {
-    background: #fbe3ff;
-    color:#0f1152;
-  }
+ 
   .ballNumber {
     width: 70px;
     height: 70px;

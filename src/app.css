@@ -1,15 +1,55 @@
+
+
+/* Colors */
 :root {
-  --blue: #1e90ff;
-  --white: #ffffff;
+  --backgroundColor: #3d7280;
+  --buttonColor: #1a1a1a;
+  --buttonHighlighter: blue;
 }
 
+body {
+  background-color: var(--backgroundColor);
+}
+
+button {
+  background-color: var(--buttonColor);
+}
+
+button:focus, input:focus, select:focus {
+  outline: 10px dashed var(--buttonHighlighter);
+}
+
+select {
+  background-color: lightblue;
+}
+/* main ball */
+#ball{
+  color: red;
+  background: #fbe3ff;
+}
+span.letter {
+  color:#0f1152;
+}
+/* Small balls */
+.inactive{
+  background: grey;
+  color:grey;
+}
+
+.active {
+  background: #fbe3ff;
+  color:#0f1152;
+}
+
+
+
+/* Other styles */
 body {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 35px;
   line-height: 24px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #3d7280;
   margin: 0;
   display: flex;
   place-items: center;
@@ -30,11 +70,8 @@ button {
   font-size: 20px;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
   color: white;
 }
-button:focus, input:focus, select:focus {
-  outline: 10px dashed blue;
-} 
+
