@@ -4,16 +4,11 @@
   import MenuBar from "../components/MenuBar.svelte";
 
   export let currentBall;
-  export let unpickedballs;
-  export let newGame;
-  export let nextBall;
-  export let showSettings;
-  export let allBalls;
-  export let pickedBalls;
-  export let repeatCall;
-  export let settings;
-  export let showPickedBalls;
   export let currentLetter;
+  export let pickedBalls;
+  export let unpickedballs;
+  export let allBalls;
+  export let settings;
 </script>
 
 <div id="mainContent">
@@ -23,12 +18,12 @@
 
 <MenuBar
   {unpickedballs}
-  {newGame}
-  {nextBall}
-  {repeatCall}
-  {showPickedBalls}
-  {showSettings}
   {settings}
+  on:newGame
+  on:repeatBall
+  on:nextBall
+  on:showBalls
+  on:showSettings
 />
 
 <style>

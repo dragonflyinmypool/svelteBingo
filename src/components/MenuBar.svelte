@@ -1,32 +1,27 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import MenuButton from "../components/MenuButton.svelte";
- 
-  export let unpickedballs
-  export let newGame
-  export let nextBall
-  export let showPickedBalls
-  export let showSettings
-  export let repeatCall
-  export let settings
+
+  export let unpickedballs;
+  export let settings;
+
+  const dispatcher = createEventDispatcher();
 </script>
 
 <div id="menuBar">
-  <MenuButton on:click={newGame} reference='newGameButton'>New Game</MenuButton>
-  <MenuButton on:click={repeatCall} reference='repeatBall'>Reapeat Ball </MenuButton>
+  <MenuButton on:click={() => dispatcher("newGame")}>New Game</MenuButton>
+  <MenuButton on:click={() => dispatcher("repeatBall")}>Reapeat Ball</MenuButton
+  >
 
   {#if unpickedballs.length > 0}
-    <MenuButton  on:click={nextBall} reference='nextBall' focus='true'>Next Ball</MenuButton>
+    <MenuButton on:click={() => dispatcher("nextBall")}>Next Ball</MenuButton>
   {/if}
 
   {#if !settings.showNumberOnMain}
-  <MenuButton on:click={showPickedBalls} reference='pickedBallsButton'>Show Picked Balls</MenuButton>
+    <MenuButton on:click={() => dispatcher("showBalls")}
+      >Show Picked Balls</MenuButton
+    >
   {/if}
 
-  <MenuButton on:click={showSettings} reference='settingsButton'>Settings </MenuButton>
+  <MenuButton on:click={() => dispatcher("showSettings")}>Settings</MenuButton>
 </div>
-
-<style>
- MenuButton {
-    margin: 10px 100px;
-  }
-</style>

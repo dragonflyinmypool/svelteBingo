@@ -7,4 +7,4 @@
 </script>
 
 <PickedBallDisplay {allBalls} {pickedBalls} />
-<MenuButton on:click reference="nextBall" focus="true">Back</MenuButton>
+<MenuButton on:click focus="true">Back</MenuButton>

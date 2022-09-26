@@ -1,25 +1,20 @@
 <script>
   import BallDisplay from "../components/BallDisplay.svelte";
   import MenuBar from "../components/MenuBar.svelte";
+
   export let currentBall;
-  export let unpickedballs;
-  export let newGame;
-  export let nextBall;
-  export let showPickedBalls;
-  export let showSettings;
-  export let repeatCall;
-  export let settings;
   export let currentLetter;
+  export let unpickedballs;
+  export let settings;
 </script>
 
 <BallDisplay {currentBall} {currentLetter} {settings} />
-
 <MenuBar
   {unpickedballs}
-  {newGame}
-  {nextBall}
-  {repeatCall}
-  {showPickedBalls}
-  {showSettings}
   {settings}
+  on:newGame
+  on:repeatBall
+  on:nextBall
+  on:showBalls
+  on:showSettings
 />

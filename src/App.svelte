@@ -178,14 +178,14 @@
   {#if currentPage == "MainWithout"}
     <MainWithout
       {currentBall}
-      {unpickedballs}
-      {newGame}
-      {nextBall}
-      {repeatCall}
-      {settings}
       {currentLetter}
-      showPickedBalls={() => changePage("ballview")}
-      showSettings={() => changePage("settings")}
+      {unpickedballs}
+      {settings}
+      on:newGame={newGame}
+      on:repeatBall={repeatCall}
+      on:nextBall={nextBall}
+      on:showBalls={() => changePage("ballview")}
+      on:showSettings={() => changePage("settings")}
     />
   {:else if currentPage == "MainTogether"}
     <MainTogether
@@ -194,12 +194,12 @@
       {pickedBalls}
       {currentBall}
       {unpickedballs}
-      {newGame}
-      {nextBall}
-      {repeatCall}
       {settings}
-      showPickedBalls={() => changePage("ballview")}
-      showSettings={() => changePage("settings")}
+      on:newGame={newGame}
+      on:repeatBall={repeatCall}
+      on:nextBall={nextBall}
+      on:showBalls={() => changePage("ballview")}
+      on:showSettings={() => changePage("settings")}
     />
   {:else if currentPage == "ballview"}
     <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("main")} />
