@@ -4,7 +4,7 @@
 :root {
   --backgroundColor: #3d7280;
   --buttonColor: #1a1a1a;
-  --buttonHighlighter: blue;
+  --buttonHighlighter:  ;
 }
 
 body {
@@ -16,12 +16,18 @@ button {
 }
 
 button:focus, input:focus, select:focus {
-  outline: 10px dashed var(--buttonHighlighter);
+  outline: 15px solid var(--buttonHighlighter);
 }
 
 select {
-  background-color: lightblue;
+  background-color: black;
+  color: white;
 }
+input {
+  background-color: black;
+  color: white;
+}
+
 /* main ball */
 #ball{
   color: red;
@@ -35,7 +41,6 @@ span.letter {
   background: grey;
   color:grey;
 }
-
 .active {
   background: #fbe3ff;
   color:#0f1152;

@@ -29,6 +29,7 @@
 	input {
 		height: 100px !important;
 		width: 100px !important;
+		background: black;
 	}
 	label {
 		display: flex;

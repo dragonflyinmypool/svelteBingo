@@ -84,7 +84,10 @@
 	on:changeSettings={changeSettings} 
 	label='Repeat call' 
 	gridLabel='R2L4' 
-	gridButton='R2B4' />	
+	gridButton='R2B4' />
+
+	<div style:grid-area='comment' style:font-size='15px'  style:line-height='30px'>For questions, complaints or feature requests contact Jamie <br>Whatsapp: +1-305-801-7497  Email: jheiney10@gmail.com
+	</div>
 </main>
 
 <MenuButton on:click reference='nextBall' focus=true>Back</MenuButton>
@@ -94,7 +97,8 @@
 		display: grid;
 		grid-template-columns: 300px 300px 300px 300px 300px;
 		grid-template-rows: 150px 150px 150px 150px 150px;
-		grid-template-areas: 
+		grid-template-areas:
+		'comment comment comment comment comment'
 		'R1L1 R1B1 . R2L1 R2B1'
 		'R1L2 R1B2 . R2L2 R2B2'
 		'R1L3 R1B3 . R2L3 R2B3'
