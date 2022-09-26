@@ -1,20 +1,21 @@
 # SvelteBingo updates
 
-## Clean up code
+### Clean up code
 
-Add event listeners
+- Add event listeners
 
-## Reliablily
+### Reliablily
 
-Save current balls & settings in browser database
+- Save current balls & settings in browser database
 
-## UI
+### UI
 
-Change colors, create a color theme, use high contrast colors
-Change timing between leter and number so that it is shorter then between each call
-Add sounds to button and next ball
+- Change colors, create a color theme, use high contrast colors
 
-## Feature
+- Change timing between leter and number so that it is shorter then between each call
+- Add sounds to button and next ball
 
-Add settings where you can remove letter from 75 ball call
-Add more languages, find a way to easily add many languages
+### Feature
+
+- Add settings where you can remove letter from 75 ball call
+- Add more languages, find a way to easily add many languages
