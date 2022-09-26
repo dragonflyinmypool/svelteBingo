@@ -1,10 +1,8 @@
-
-
 /* Colors */
 :root {
   --backgroundColor: #3d7280;
   --buttonColor: #1a1a1a;
-  --buttonHighlighter:  ;
+  --buttonHighlighter: ;
 }
 
 body {
@@ -15,7 +13,9 @@ button {
   background-color: var(--buttonColor);
 }
 
-button:focus, input:focus, select:focus {
+button:focus,
+input:focus,
+select:focus {
   outline: 15px solid var(--buttonHighlighter);
 }
 
@@ -23,27 +23,31 @@ select {
   background-color: black;
   color: white;
 }
+
 input {
   background-color: black;
   color: white;
 }
 
 /* main ball */
-#ball{
+#ball {
   color: red;
   background: #fbe3ff;
 }
+
 span.letter {
-  color:#0f1152;
+  color: #0f1152;
 }
+
 /* Small balls */
-.inactive{
+.inactive {
   background: grey;
-  color:grey;
+  color: grey;
 }
+
 .active {
   background: #fbe3ff;
-  color:#0f1152;
+  color: #0f1152;
 }
 
 
@@ -79,4 +83,3 @@ button {
   transition: border-color 0.25s;
   color: white;
 }
-

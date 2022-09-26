@@ -2,28 +2,28 @@
   import BallDisplay from "../components/BallDisplay.svelte";
   import PickedBallDisplay from "../components/PickedBallDisplay.svelte";
   import MenuBar from "../components/MenuBar.svelte";
-  
-  export let currentBall
-  export let unpickedballs
-  export let newGame
-  export let nextBall
-  export let showSettings
-  export let allBalls
-  export let pickedBalls
-  export let repeatCall
-  export let settings
-  export let showPickedBalls
-  export let currentLetter
+
+  export let currentBall;
+  export let unpickedballs;
+  export let newGame;
+  export let nextBall;
+  export let showSettings;
+  export let allBalls;
+  export let pickedBalls;
+  export let repeatCall;
+  export let settings;
+  export let showPickedBalls;
+  export let currentLetter;
 </script>
 
 <div id="mainContent">
-  <BallDisplay {currentBall} {currentLetter} {settings}/>
+  <BallDisplay {currentBall} {currentLetter} {settings} />
   <PickedBallDisplay {allBalls} {pickedBalls} />
 </div>
 
-<MenuBar 
-  {unpickedballs} 
-  {newGame} 
+<MenuBar
+  {unpickedballs}
+  {newGame}
   {nextBall}
   {repeatCall}
   {showPickedBalls}

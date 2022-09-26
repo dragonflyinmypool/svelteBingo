@@ -1,18 +1,25 @@
 <script>
-
   // ***SETTINGS***
   let settings = {
     showNumberOnMain: true,
-    showNumbers:false,
-    ballNumbers:[30,75,80,90,100],
+    showNumbers: false,
+    ballNumbers: [30, 75, 80, 90, 100],
     numberOfBalls: 75,
     showLetter: true,
     repeatCall: false,
-    languagesAvailable:['None','Chinese', 'English', 'French', 'German', "Spanish", "Italian"],
-    lang1: 'None',
-    lang2: 'None',
-    lang3: 'None',
-    }
+    languagesAvailable: [
+      "None",
+      "Chinese",
+      "English",
+      "French",
+      "German",
+      "Spanish",
+      "Italian",
+    ],
+    lang1: "None",
+    lang2: "None",
+    lang3: "None",
+  };
 
   // ***PAGES***
   import MainWithout from "./pages/MainWithout.svelte";
@@ -20,13 +27,13 @@
   import Settings from "./pages/Settings.svelte";
   import PickedBalls from "./pages/PickedBalls.svelte";
 
-  let currentPage = 'MainTogether'
+  let currentPage = "MainTogether";
 
   function changePage(page) {
-    if (page == 'main' && !settings.showNumberOnMain) {
-      page = 'MainWithout'
-    } else if(page == 'main' && settings.showNumberOnMain) {
-      page = 'MainTogether'
+    if (page == "main" && !settings.showNumberOnMain) {
+      page = "MainWithout";
+    } else if (page == "main" && settings.showNumberOnMain) {
+      page = "MainTogether";
     }
     currentPage = page;
   }
@@ -36,181 +43,168 @@
   let pickedBalls;
   let currentBall;
   let unpickedballs;
-  let currentLetter = 'false';
+  let currentLetter = "false";
 
-  newGame()
+  newGame();
 
   // ***NEW GAME***
   function newGame() {
     allBalls = Array.from({ length: settings.numberOfBalls }, (_, i) => i + 1);
-    unpickedballs = [...allBalls]
-    currentBall = undefined
-    pickedBalls = []
+    unpickedballs = [...allBalls];
+    currentBall = undefined;
+    pickedBalls = [];
   }
-
 
   // ***GAME PLAY***
   function nextBall(event) {
-    let randomNumber = Math.floor(Math.random() * (unpickedballs.length-1 + 1))
-    currentBall = unpickedballs[randomNumber]
-    unpickedballs.splice(randomNumber,1)
+    let randomNumber = Math.floor(
+      Math.random() * (unpickedballs.length - 1 + 1)
+    );
+    currentBall = unpickedballs[randomNumber];
+    unpickedballs.splice(randomNumber, 1);
 
-    pickedBalls = allBalls.filter((ball) =>{
-      return !unpickedballs.includes(ball)
-    })
+    pickedBalls = allBalls.filter((ball) => {
+      return !unpickedballs.includes(ball);
+    });
 
     function sendLetter() {
       if (settings.numberOfBalls == 75) {
-         return addLetter(currentBall)
+        return addLetter(currentBall);
       } else {
-        return 'false'
+        return "false";
       }
     }
-    currentLetter = sendLetter()
+    currentLetter = sendLetter();
 
-   callBall(currentBall, currentLetter)
-    
+    callBall(currentBall, currentLetter);
   }
 
   function addLetter(currentBall) {
-    let withLetter
+    let withLetter;
 
     switch (true) {
       case currentBall == undefined:
-        withLetter = '';
-        break; 
+        withLetter = "";
+        break;
       case currentBall <= 15:
-        withLetter = 'B';
+        withLetter = "B";
         break;
       case currentBall <= 30:
-        withLetter = 'I';
+        withLetter = "I";
         break;
       case currentBall <= 45:
-        withLetter = 'N';
+        withLetter = "N";
         break;
       case currentBall <= 60:
-        withLetter = 'G';
-        break;  
+        withLetter = "G";
+        break;
       default:
-      withLetter = 'O';
-  } 
-    return withLetter
+        withLetter = "O";
+    }
+    return withLetter;
   }
 
   function repeatCall() {
-    callBall(currentBall, currentLetter)
+    callBall(currentBall, currentLetter);
   }
 
-  // 
+  //
   // CALL BALLS
-  // 
-  function callBall (currentBall, currentLetter) {
-    let audio = new Audio ();
+  //
+  function callBall(currentBall, currentLetter) {
+    let audio = new Audio();
     let timing = 0;
 
     // Make an array with all the languages to be called
-    function checkSettings (){
-      let arrayOfLanguages = []
-      if (settings.lang1 !== 'None') {
-        arrayOfLanguages.push(settings.lang1)
+    function checkSettings() {
+      let arrayOfLanguages = [];
+      if (settings.lang1 !== "None") {
+        arrayOfLanguages.push(settings.lang1);
       }
-      if (settings.lang2 !== 'None') {
-        arrayOfLanguages.push(settings.lang2)
+      if (settings.lang2 !== "None") {
+        arrayOfLanguages.push(settings.lang2);
       }
-      if (settings.lang3 !== 'None') {
-        arrayOfLanguages.push(settings.lang3)
+      if (settings.lang3 !== "None") {
+        arrayOfLanguages.push(settings.lang3);
       }
-      return arrayOfLanguages
+      return arrayOfLanguages;
     }
-    let arrayOfLanguages = checkSettings()
+    let arrayOfLanguages = checkSettings();
 
-    
     // Create a que of all calls to be said including: whatToSay and lang
     // [[whatToSay, lang],[whatToSay, lang],[whatToSay, lang]]
-    let callList = []
+    let callList = [];
 
     for (var i = 0; i < arrayOfLanguages.length; i++) {
-    
-       if (currentLetter !== 'false') {
-        callList.push([currentLetter, arrayOfLanguages[i]])
+      if (currentLetter !== "false") {
+        callList.push([currentLetter, arrayOfLanguages[i]]);
       }
-        callList.push([currentBall, arrayOfLanguages[i]])
+      callList.push([currentBall, arrayOfLanguages[i]]);
 
       if (settings.repeatCall) {
-        if (currentLetter !== 'false') {
-        callList.push([currentLetter, arrayOfLanguages[i]])
+        if (currentLetter !== "false") {
+          callList.push([currentLetter, arrayOfLanguages[i]]);
+        }
+        callList.push([currentBall, arrayOfLanguages[i]]);
       }
-        callList.push([currentBall, arrayOfLanguages[i]])
-
-        
-      }
-
     }
-    
-    executeQueOfCalls()
-  
+
+    executeQueOfCalls();
+
     // GO through the call list, send to the timer
-    function executeQueOfCalls (){
+    function executeQueOfCalls() {
       for (var i = 0; i < callList.length; i++) {
-        sendTheCallsWith(callList[i])
+        sendTheCallsWith(callList[i]);
       }
     }
 
     // Send the calls to the caller with a timer
     function sendTheCallsWith(call) {
-        setTimeout(() => {
-          theCaller(call[0], call[1]);
-        }, timing);
-      timing = timing + 2000
+      setTimeout(() => {
+        theCaller(call[0], call[1]);
+      }, timing);
+      timing = timing + 2000;
     }
 
-    //Call the calls 
-    function theCaller (whatToSay, lang){
-      audio.src = '/assets/' + lang + '/'+ whatToSay + '.ogg';
+    //Call the calls
+    function theCaller(whatToSay, lang) {
+      audio.src = "/assets/" + lang + "/" + whatToSay + ".ogg";
       audio.play();
     }
   }
 </script>
 
 <main>
-  {#if currentPage == 'MainWithout'}
-    <MainWithout 
-      {currentBall} 
-      {unpickedballs} 
-      {newGame} 
+  {#if currentPage == "MainWithout"}
+    <MainWithout
+      {currentBall}
+      {unpickedballs}
+      {newGame}
       {nextBall}
       {repeatCall}
       {settings}
       {currentLetter}
-      showPickedBalls={()=>changePage('ballview')}
-      showSettings={()=>changePage('settings')}
+      showPickedBalls={() => changePage("ballview")}
+      showSettings={() => changePage("settings")}
     />
-  {:else if currentPage == 'MainTogether'}
+  {:else if currentPage == "MainTogether"}
     <MainTogether
-      {currentLetter} 
-      {allBalls} 
-      {pickedBalls} 
-      {currentBall} 
-      {unpickedballs} 
-      {newGame} 
+      {currentLetter}
+      {allBalls}
+      {pickedBalls}
+      {currentBall}
+      {unpickedballs}
+      {newGame}
       {nextBall}
       {repeatCall}
       {settings}
-      showPickedBalls={()=>changePage('ballview')}
-      showSettings={()=>changePage('settings')}
+      showPickedBalls={() => changePage("ballview")}
+      showSettings={() => changePage("settings")}
     />
-  {:else if currentPage == 'ballview'}
-    <PickedBalls 
-      {allBalls} 
-      {pickedBalls} 
-      on:click={()=>changePage('main')}
-    />
-  {:else if currentPage == 'settings'}
-    <Settings
-      {settings}
-      {newGame}
-      on:click={()=>changePage('main')}
-    />
+  {:else if currentPage == "ballview"}
+    <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("main")} />
+  {:else if currentPage == "settings"}
+    <Settings {settings} {newGame} on:click={() => changePage("main")} />
   {/if}
 </main>
 
@@ -219,7 +213,7 @@
     font-weight: bold;
     width: 1800px;
     display: grid;
-    grid-template-rows:875px 125px;
+    grid-template-rows: 875px 125px;
     justify-items: center;
     align-items: center;
   }
