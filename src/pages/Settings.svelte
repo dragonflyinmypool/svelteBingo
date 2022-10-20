@@ -5,7 +5,7 @@
 
   export let settings;
   export let newGame;
-  // s
+
   function changeSettings(e) {
     let input = e.detail.value;
 
@@ -18,6 +18,8 @@
     if (e.detail.newGame == "true") {
       newGame();
     }
+
+    localStorage.setItem("settings", JSON.stringify(settings));
   }
 </script>
 

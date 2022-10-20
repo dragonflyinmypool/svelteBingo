@@ -1,25 +1,36 @@
 <script>
   // ***SETTINGS***
-  let settings = {
-    showNumberOnMain: true,
-    showNumbers: false,
-    ballNumbers: [30, 75, 80, 90, 100],
-    numberOfBalls: 75,
-    showLetter: true,
-    repeatCall: false,
-    languagesAvailable: [
-      "None",
-      "Chinese",
-      "English",
-      "French",
-      "German",
-      "Spanish",
-      "Italian",
-    ],
-    lang1: "None",
-    lang2: "None",
-    lang3: "None",
-  };
+
+  function setSettings() {
+    let settings = {
+      showNumberOnMain: true,
+      showNumbers: false,
+      ballNumbers: [30, 75, 80, 90, 100],
+      numberOfBalls: 75,
+      showLetter: true,
+      repeatCall: false,
+      languagesAvailable: [
+        "None",
+        "Chinese",
+        "English",
+        "French",
+        "German",
+        "Spanish",
+        "Italian",
+      ],
+      lang1: "None",
+      lang2: "None",
+      lang3: "None",
+    };
+
+    if (localStorage.getItem("settings") == null) {
+      localStorage.setItem("settings", JSON.stringify(settings));
+    } else {
+      settings = JSON.parse(localStorage.getItem("settings"));
+    }
+    return settings;
+  }
+  let settings = setSettings();
 
   // ***PAGES***
   import MainWithout from "./pages/MainWithout.svelte";
@@ -37,6 +48,8 @@
     }
     currentPage = page;
   }
+
+  changePage("main");
 
   // ***GAME SETUP***
   let allBalls;
