@@ -1,6 +1,5 @@
 <script>
   // ***SETTINGS***
-
   function setSettings() {
     let settings = {
       showNumberOnMain: true,
@@ -52,44 +51,61 @@
   changePage("main");
 
   // ***GAME SETUP***
-  let allBalls;
-  let pickedBalls;
-  let currentBall;
-  let unpickedballs;
-  let currentLetter = "false";
 
-  newGame();
+  function setgs() {
+    let gs = {
+      allBalls: [],
+      pickedBalls: [],
+      unpickedBalls: [],
+      currentBall: undefined,
+      currentLetter: undefined,
+    };
+    if (localStorage.getItem("gs") == null) {
+      localStorage.setItem("gs", JSON.stringify(gs));
+    } else {
+      gs = JSON.parse(localStorage.getItem("gs"));
+    }
+    return gs;
+  }
+  let gs = setgs();
 
   // ***NEW GAME***
   function newGame() {
-    allBalls = Array.from({ length: settings.numberOfBalls }, (_, i) => i + 1);
-    unpickedballs = [...allBalls];
-    currentBall = undefined;
-    pickedBalls = [];
+    gs.allBalls = Array.from(
+      { length: settings.numberOfBalls },
+      (_, i) => i + 1
+    );
+    gs.pickedBalls = [];
+    gs.unpickedballs = [...gs.allBalls];
+    gs.currentBall = undefined;
+    gs.currentLetter = undefined;
+    localStorage.setItem("gs", JSON.stringify(gs));
   }
 
   // ***GAME PLAY***
   function nextBall(event) {
     let randomNumber = Math.floor(
-      Math.random() * (unpickedballs.length - 1 + 1)
+      Math.random() * (gs.unpickedballs.length - 1 + 1)
     );
-    currentBall = unpickedballs[randomNumber];
-    unpickedballs.splice(randomNumber, 1);
+    gs.currentBall = gs.unpickedballs[randomNumber];
+    gs.unpickedballs.splice(randomNumber, 1);
 
-    pickedBalls = allBalls.filter((ball) => {
-      return !unpickedballs.includes(ball);
+    gs.pickedBalls = gs.allBalls.filter((ball) => {
+      return !gs.unpickedballs.includes(ball);
     });
 
     function sendLetter() {
       if (settings.numberOfBalls == 75) {
-        return addLetter(currentBall);
+        return addLetter(gs.currentBall);
       } else {
         return "false";
       }
     }
-    currentLetter = sendLetter();
+    gs.currentLetter = sendLetter();
 
-    callBall(currentBall, currentLetter);
+    callBall(gs.currentBall, gs.currentLetter);
+    // save gs to local storage
+    localStorage.setItem("gs", JSON.stringify(gs));
   }
 
   function addLetter(currentBall) {
@@ -118,7 +134,7 @@
   }
 
   function repeatCall() {
-    callBall(currentBall, currentLetter);
+    callBall(gs.currentBall, gs.currentLetter);
   }
 
   //
@@ -190,9 +206,9 @@
 <main>
   {#if currentPage == "MainWithout"}
     <MainWithout
-      {currentBall}
-      {currentLetter}
-      {unpickedballs}
+      currentBall={gs.currentBall}
+      currentLetter={gs.currentLetter}
+      unpickedballs={gs.unpickedballs}
       {settings}
       on:newGame={newGame}
       on:repeatBall={repeatCall}
@@ -202,11 +218,11 @@
     />
   {:else if currentPage == "MainTogether"}
     <MainTogether
-      {currentLetter}
-      {allBalls}
-      {pickedBalls}
-      {currentBall}
-      {unpickedballs}
+      currentLetter={gs.currentLetter}
+      allBalls={gs.allBalls}
+      pickedBalls={gs.pickedBalls}
+      currentBall={gs.currentBall}
+      unpickedballs={gs.unpickedballs}
       {settings}
       on:newGame={newGame}
       on:repeatBall={repeatCall}
@@ -215,7 +231,11 @@
       on:showSettings={() => changePage("settings")}
     />
   {:else if currentPage == "ballview"}
-    <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("main")} />
+    <PickedBalls
+      allBalls={gs.allBalls}
+      pickedBalls={gs.pickedBalls}
+      on:click={() => changePage("main")}
+    />
   {:else if currentPage == "settings"}
     <Settings {settings} {newGame} on:click={() => changePage("main")} />
   {/if}
