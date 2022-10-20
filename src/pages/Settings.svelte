@@ -5,7 +5,7 @@
 
   export let settings;
   export let newGame;
-
+  // s
   function changeSettings(e) {
     let input = e.detail.value;
 
