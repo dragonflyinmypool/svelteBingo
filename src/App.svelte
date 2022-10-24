@@ -30,18 +30,13 @@
   import BallDisplay from "./components/BallDisplay.svelte";
   import PickedBallDisplay from "./components/PickedBallDisplay.svelte";
 
-  let currentPage = "Main";
-
-  function changePage(page) {
-    currentPage = page;
-  }
-
   // ***GAME SETUP***
   let allBalls;
   let pickedBalls;
   let currentBall;
   let unpickedballs;
   let currentLetter = "false";
+  let currentPage = "Main";
 
   newGame();
 
@@ -180,16 +175,20 @@
       on:newGame={newGame}
       on:repeatBall={repeatCall}
       on:nextBall={nextBall}
-      on:showBalls={() => changePage("ballview")}
-      on:showSettings={() => changePage("settings")}
+      on:showBalls={() => (currentPage = "ballview")}
+      on:showSettings={() => (currentPage = "settings")}
     >
       <BallDisplay {currentBall} {currentLetter} {settings} slot="center" />
       <PickedBallDisplay {allBalls} {pickedBalls} slot="center2" />
     </Main>
   {:else if currentPage == "ballview"}
-    <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("Main")} />
+    <PickedBalls
+      {allBalls}
+      {pickedBalls}
+      on:click={() => (currentPage = "Main")}
+    />
   {:else if currentPage == "settings"}
-    <Settings {settings} {newGame} on:click={() => changePage("Main")} />
+    <Settings {settings} {newGame} on:click={() => (currentPage = "Main")} />
   {/if}
 </main>
 
