@@ -4,8 +4,10 @@
 
   export let unpickedballs;
   export let settings;
+  export let showGetOldState;
 
   const dispatcher = createEventDispatcher();
+  console.log(unpickedballs);
 </script>
 
 <div id="menuBar">
@@ -24,4 +26,9 @@
   {/if}
 
   <MenuButton on:click={() => dispatcher("showSettings")}>Settings</MenuButton>
+  {#if showGetOldState}
+    <MenuButton on:click={() => dispatcher("getOldState")}>
+      Get Old State
+    </MenuButton>
+  {/if}
 </div>

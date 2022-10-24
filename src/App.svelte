@@ -51,24 +51,19 @@
   changePage("main");
 
   // ***GAME SETUP***
+  let gs = {
+    allBalls: [],
+    pickedBalls: [],
+    unpickedBalls: [],
+    currentBall: undefined,
+    currentLetter: undefined,
+  };
 
-  function setgs() {
-    let gs = {
-      allBalls: [],
-      pickedBalls: [],
-      unpickedBalls: [],
-      currentBall: undefined,
-      currentLetter: undefined,
-    };
-    if (localStorage.getItem("gs") == null) {
-      localStorage.setItem("gs", JSON.stringify(gs));
-    } else {
-      gs = JSON.parse(localStorage.getItem("gs"));
-    }
-    return gs;
+  let showGetOldState = localStorage.getItem("gs") ? true : false;
+
+  function getOldState() {
+    gs = JSON.parse(localStorage.getItem("gs"));
   }
-  let gs = setgs();
-
   // ***NEW GAME***
   function newGame() {
     gs.allBalls = Array.from(
@@ -108,6 +103,7 @@
     localStorage.setItem("gs", JSON.stringify(gs));
   }
 
+  console.log(gs.unpickedBalls);
   function addLetter(currentBall) {
     let withLetter;
 
@@ -210,11 +206,13 @@
       currentLetter={gs.currentLetter}
       unpickedballs={gs.unpickedballs}
       {settings}
+      {showGetOldState}
       on:newGame={newGame}
       on:repeatBall={repeatCall}
       on:nextBall={nextBall}
       on:showBalls={() => changePage("ballview")}
       on:showSettings={() => changePage("settings")}
+      on:getOldState={() => getOldState()}
     />
   {:else if currentPage == "MainTogether"}
     <MainTogether
@@ -223,12 +221,14 @@
       pickedBalls={gs.pickedBalls}
       currentBall={gs.currentBall}
       unpickedballs={gs.unpickedballs}
+      {showGetOldState}
       {settings}
       on:newGame={newGame}
       on:repeatBall={repeatCall}
       on:nextBall={nextBall}
       on:showBalls={() => changePage("ballview")}
       on:showSettings={() => changePage("settings")}
+      on:getOldState={() => getOldState()}
     />
   {:else if currentPage == "ballview"}
     <PickedBalls

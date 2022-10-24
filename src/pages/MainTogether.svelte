@@ -9,6 +9,8 @@
   export let unpickedballs;
   export let allBalls;
   export let settings;
+  export let showGetOldState;
+  console.log(unpickedballs);
 </script>
 
 <div id="mainContent">
@@ -24,6 +26,8 @@
   on:nextBall
   on:showBalls
   on:showSettings
+  on:getOldState
+  {showGetOldState}
 />
 
 <style>
