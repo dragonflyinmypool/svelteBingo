@@ -22,19 +22,17 @@
   };
 
   // ***PAGES***
-  import MainWithout from "./pages/MainWithout.svelte";
-  import MainTogether from "./pages/MainTogether.svelte";
+  import Main from "./pages/Main.svelte";
   import Settings from "./pages/Settings.svelte";
   import PickedBalls from "./pages/PickedBalls.svelte";
 
-  let currentPage = "MainTogether";
+  // Components
+  import BallDisplay from "./components/BallDisplay.svelte";
+  import PickedBallDisplay from "./components/PickedBallDisplay.svelte";
+
+  let currentPage = "Main";
 
   function changePage(page) {
-    if (page == "main" && !settings.showNumberOnMain) {
-      page = "MainWithout";
-    } else if (page == "main" && settings.showNumberOnMain) {
-      page = "MainTogether";
-    }
     currentPage = page;
   }
 
@@ -175,10 +173,8 @@
 </script>
 
 <main>
-  {#if currentPage == "MainWithout"}
-    <MainWithout
-      {currentBall}
-      {currentLetter}
+  {#if currentPage == "Main"}
+    <Main
       {unpickedballs}
       {settings}
       on:newGame={newGame}
@@ -186,25 +182,14 @@
       on:nextBall={nextBall}
       on:showBalls={() => changePage("ballview")}
       on:showSettings={() => changePage("settings")}
-    />
-  {:else if currentPage == "MainTogether"}
-    <MainTogether
-      {currentLetter}
-      {allBalls}
-      {pickedBalls}
-      {currentBall}
-      {unpickedballs}
-      {settings}
-      on:newGame={newGame}
-      on:repeatBall={repeatCall}
-      on:nextBall={nextBall}
-      on:showBalls={() => changePage("ballview")}
-      on:showSettings={() => changePage("settings")}
-    />
+    >
+      <BallDisplay {currentBall} {currentLetter} {settings} slot="center" />
+      <PickedBallDisplay {allBalls} {pickedBalls} slot="center2" />
+    </Main>
   {:else if currentPage == "ballview"}
-    <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("main")} />
+    <PickedBalls {allBalls} {pickedBalls} on:click={() => changePage("Main")} />
   {:else if currentPage == "settings"}
-    <Settings {settings} {newGame} on:click={() => changePage("main")} />
+    <Settings {settings} {newGame} on:click={() => changePage("Main")} />
   {/if}
 </main>
 
