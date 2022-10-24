@@ -1,204 +1,118 @@
 <script>
-  // ***SETTINGS***
+  // Pages
+  import MainView from "./pages/MainView.svelte";
+  import DisplayBalls from "./pages/DisplayBalls.svelte";
+  // @ts-ignore
+  import Settings from "./pages/Settings.svelte";
+
+  // *** SET STATE ***
+  // Settings
   let settings = {
-    showNumberOnMain: true,
-    showNumbers: false,
-    ballNumbers: [30, 75, 80, 90, 100],
+    showPickedBalls: true,
     numberOfBalls: 75,
-    showLetter: true,
     repeatCall: false,
-    languagesAvailable: [
-      "None",
-      "Chinese",
-      "English",
-      "French",
-      "German",
-      "Spanish",
-      "Italian",
-    ],
-    lang1: "None",
-    lang2: "None",
-    lang3: "None",
+    callBallOutloud: [],
   };
 
-  // ***PAGES***
-  import Main from "./pages/Main.svelte";
-  import Settings from "./pages/Settings.svelte";
-  import PickedBalls from "./pages/PickedBalls.svelte";
+  // Game state
+  let gameState = {
+    unpickedBalls: [],
+    pickedBalls: [],
+  };
 
-  // Components
-  import BallDisplay from "./components/BallDisplay.svelte";
-  import PickedBallDisplay from "./components/PickedBallDisplay.svelte";
+  // App state
+  let state = {
+    currentPage: "MainView",
+  };
 
-  // ***GAME SETUP***
-  let allBalls;
-  let pickedBalls;
-  let currentBall;
-  let unpickedballs;
-  let currentLetter = "false";
-  let currentPage = "Main";
+  // *** NEW GAME ***
+  // Start a new game
+  function newGame() {
+    // clear picked balls
+    gameState.pickedBalls = [];
+    // add all balls
+    gameState.unpickedBalls = createBalls(settings.numberOfBalls);
+  }
+
+  // Create balls
+  function createBalls(numberOfBalls) {
+    let balls = [];
+
+    for (let i = 1; i <= numberOfBalls; i++) {
+      let ball = {
+        number: i,
+        letter: addLetter(i),
+        picked: false,
+      };
+      balls.push(ball);
+    }
+
+    return balls;
+  }
+
+  // Add letter to bingo ball
+  function addLetter(ballNumber) {
+    if (settings.numberOfBalls == 75) {
+      let letter = "";
+      if (ballNumber <= 15) {
+        letter = "B";
+      } else if (ballNumber <= 30) {
+        letter = "I";
+      } else if (ballNumber <= 45) {
+        letter = "N";
+      } else if (ballNumber <= 60) {
+        letter = "G";
+      } else if (ballNumber <= 75) {
+        letter = "O";
+      }
+      return letter;
+    }
+  }
 
   newGame();
 
-  // ***NEW GAME***
-  function newGame() {
-    allBalls = Array.from({ length: settings.numberOfBalls }, (_, i) => i + 1);
-    unpickedballs = [...allBalls];
-    currentBall = undefined;
-    pickedBalls = [];
-  }
+  // *** Game Play ***
+  // Pick a ball
+  function pickNextBall() {
+    // get a random ball from the unpicked balls
+    let randomBall =
+      gameState.unpickedBalls[
+        Math.floor(Math.random() * gameState.unpickedBalls.length)
+      ];
+    // mark the ball as picked
+    randomBall.picked = true;
 
-  // ***GAME PLAY***
-  function nextBall(event) {
-    let randomNumber = Math.floor(
-      Math.random() * (unpickedballs.length - 1 + 1)
+    // remove the ball from unpicked balls
+    gameState.unpickedBalls = gameState.unpickedBalls.filter(
+      (ball) => ball.number != randomBall.number
     );
-    currentBall = unpickedballs[randomNumber];
-    unpickedballs.splice(randomNumber, 1);
 
-    pickedBalls = allBalls.filter((ball) => {
-      return !unpickedballs.includes(ball);
-    });
-
-    function sendLetter() {
-      if (settings.numberOfBalls == 75) {
-        return addLetter(currentBall);
-      } else {
-        return "false";
-      }
-    }
-    currentLetter = sendLetter();
-
-    callBall(currentBall, currentLetter);
-  }
-
-  function addLetter(currentBall) {
-    let withLetter;
-
-    switch (true) {
-      case currentBall == undefined:
-        withLetter = "";
-        break;
-      case currentBall <= 15:
-        withLetter = "B";
-        break;
-      case currentBall <= 30:
-        withLetter = "I";
-        break;
-      case currentBall <= 45:
-        withLetter = "N";
-        break;
-      case currentBall <= 60:
-        withLetter = "G";
-        break;
-      default:
-        withLetter = "O";
-    }
-    return withLetter;
-  }
-
-  function repeatCall() {
-    callBall(currentBall, currentLetter);
-  }
-
-  //
-  // CALL BALLS
-  //
-  function callBall(currentBall, currentLetter) {
-    let audio = new Audio();
-    let timing = 0;
-
-    // Make an array with all the languages to be called
-    function checkSettings() {
-      let arrayOfLanguages = [];
-      if (settings.lang1 !== "None") {
-        arrayOfLanguages.push(settings.lang1);
-      }
-      if (settings.lang2 !== "None") {
-        arrayOfLanguages.push(settings.lang2);
-      }
-      if (settings.lang3 !== "None") {
-        arrayOfLanguages.push(settings.lang3);
-      }
-      return arrayOfLanguages;
-    }
-    let arrayOfLanguages = checkSettings();
-
-    // Create a que of all calls to be said including: whatToSay and lang
-    // [[whatToSay, lang],[whatToSay, lang],[whatToSay, lang]]
-    let callList = [];
-
-    for (var i = 0; i < arrayOfLanguages.length; i++) {
-      if (currentLetter !== "false") {
-        callList.push([currentLetter, arrayOfLanguages[i]]);
-      }
-      callList.push([currentBall, arrayOfLanguages[i]]);
-
-      if (settings.repeatCall) {
-        if (currentLetter !== "false") {
-          callList.push([currentLetter, arrayOfLanguages[i]]);
-        }
-        callList.push([currentBall, arrayOfLanguages[i]]);
-      }
-    }
-
-    executeQueOfCalls();
-
-    // GO through the call list, send to the timer
-    function executeQueOfCalls() {
-      for (var i = 0; i < callList.length; i++) {
-        sendTheCallsWith(callList[i]);
-      }
-    }
-
-    // Send the calls to the caller with a timer
-    function sendTheCallsWith(call) {
-      setTimeout(() => {
-        theCaller(call[0], call[1]);
-      }, timing);
-      timing = timing + 2000;
-    }
-
-    //Call the calls
-    function theCaller(whatToSay, lang) {
-      audio.src = "/assets/" + lang + "/" + whatToSay + ".ogg";
-      audio.play();
-    }
+    // add the ball to picked balls
+    gameState.pickedBalls.push(randomBall);
   }
 </script>
 
 <main>
-  {#if currentPage == "Main"}
-    <Main
-      {unpickedballs}
-      {settings}
-      on:newGame={newGame}
-      on:repeatBall={repeatCall}
-      on:nextBall={nextBall}
-      on:showBalls={() => (currentPage = "ballview")}
-      on:showSettings={() => (currentPage = "settings")}
-    >
-      <BallDisplay {currentBall} {currentLetter} {settings} slot="center" />
-      <PickedBallDisplay {allBalls} {pickedBalls} slot="center2" />
-    </Main>
-  {:else if currentPage == "ballview"}
-    <PickedBalls
-      {allBalls}
-      {pickedBalls}
-      on:click={() => (currentPage = "Main")}
+  {#if state.currentPage == "MainView"}
+    <MainView
+      {gameState}
+      on:newGame={() => newGame()}
+      on:nextBall={pickNextBall}
+      on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}
+      on:showSettings={() => (state.currentPage = "Settings")}
     />
-  {:else if currentPage == "settings"}
-    <Settings {settings} {newGame} on:click={() => (currentPage = "Main")} />
+  {:else if state.currentPage == "DisplayAllBalls"}
+    <DisplayBalls
+      {gameState}
+      on:back={() => (state.currentPage = "MainView")}
+    />
+  {:else if state.currentPage == "Settings"}
+    <Settings />
   {/if}
 </main>
 
 <style>
   main {
-    font-weight: bold;
-    width: 1800px;
-    display: grid;
-    grid-template-rows: 875px 125px;
-    justify-items: center;
-    align-items: center;
+    padding: 60px;
   }
 </style>

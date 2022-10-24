@@ -1,108 +1,24 @@
 <script>
-  import SelectButton from "../components/SelectButton.svelte";
-  import CheckBox from "../components/CheckBox.svelte";
-  import MenuButton from "../components/MenuButton.svelte";
-
-  export let settings;
-  export let newGame;
-  // s
-  function changeSettings(e) {
-    let input = e.detail.value;
-
-    if (typeof settings[e.detail.setting] == "number") {
-      input = Number(input);
-    }
-
-    settings[e.detail.setting] = input;
-
-    if (e.detail.newGame == "true") {
-      newGame();
-    }
-  }
+  let possibleSettings = {
+    ballNumbers: [30, 75, 80, 90, 100],
+    languagesAvailable: [
+      "None",
+      "Chinese",
+      "English",
+      "French",
+      "German",
+      "Spanish",
+      "Italian",
+    ],
+  };
 </script>
 
 <main>
-  <!-- ROW 1  -->
-  <!-- Number of balls -->
-  <SelectButton
-    options={settings.ballNumbers}
-    currentLanguage={settings.numberOfBalls}
-    startNewGame="true"
-    settingToBeChanged="numberOfBalls"
-    on:changeSettings={changeSettings}
-    text="Number of ball"
-    gridLabel="R1L1"
-    gridButton="R1B1"
-  />
-
-  <!-- Show called -->
-  <CheckBox
-    currentSetting={settings.showNumberOnMain}
-    startNewGame="false"
-    settingToBeChanged="showNumberOnMain"
-    on:changeSettings={changeSettings}
-    label="Show called balls on main screen"
-    gridLabel="R1L2"
-    gridButton="R1B2"
-  />
-
-  <!-- ROW 2 -->
-  <!-- Change language -->
-  <SelectButton
-    options={settings.languagesAvailable}
-    currentLanguage={settings.lang1}
-    settingToBeChanged="lang1"
-    on:changeSettings={changeSettings}
-    text="Voice caller 1"
-    gridLabel="R2L1"
-    gridButton="R2B1"
-    startNewGame="false"
-  />
-
-  <SelectButton
-    options={settings.languagesAvailable}
-    currentLanguage={settings.lang2}
-    settingToBeChanged="lang2"
-    on:changeSettings={changeSettings}
-    text="Voice caller 2"
-    gridLabel="R2L2"
-    gridButton="R2B2"
-    startNewGame="false"
-  />
-
-  <SelectButton
-    options={settings.languagesAvailable}
-    currentLanguage={settings.lang3}
-    settingToBeChanged="lang3"
-    on:changeSettings={changeSettings}
-    text="Voice caller 3"
-    gridLabel="R2L3"
-    gridButton="R2B3"
-    startNewGame="false"
-  />
-
-  <!-- Reapeat each ball -->
-  <CheckBox
-    currentSetting={settings.repeatCall}
-    startNewGame="false"
-    settingToBeChanged="repeatCall"
-    on:changeSettings={changeSettings}
-    label="Repeat call"
-    gridLabel="R2L4"
-    gridButton="R2B4"
-  />
-
-  <div
-    style:grid-area="comment"
-    style:font-size="15px"
-    style:line-height="30px"
-  >
+  <div id="comment">
     For questions, complaints or feature requests contact Jamie <br />Whatsapp:
     +1-305-801-7497 Email: jheiney10@gmail.com
   </div>
 </main>
-
-<MenuButton on:click focus="true">Back</MenuButton>
 
 <style>
   main {
@@ -117,5 +33,10 @@
       "R1L4 R1B4 . R2L4 R2B4";
     align-items: center;
     justify-items: center;
+  }
+  #comment {
+    grid-area: comment;
+    font-size: 15px;
+    line-height: 30px;
   }
 </style>

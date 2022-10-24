@@ -17,5 +17,12 @@
   button {
     margin: 0px 10px;
     width: 200px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: blue;
+    border: none;
+    cursor: pointer;
   }
 </style>
