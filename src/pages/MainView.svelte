@@ -21,5 +21,12 @@
     unpickedBalls={gameState.unpickedBalls}
     pickedBalls={gameState.pickedBalls}
   />
-  <Menu slot="menu" on:newGame on:nextBall on:showPickedBalls on:showSettings />
+  <Menu
+    slot="menu"
+    on:newGame
+    on:nextBall
+    on:showPickedBalls
+    on:showSettings
+    on:repeatBall
+  />
 </Template>

@@ -7,6 +7,7 @@
   import { setting } from "./stores/settingsStore.js";
   // lib
   import { callBall } from "./lib/callBalls.js";
+  import { loop_guard } from "svelte/internal";
 
   // Game state
   let gameState = {
@@ -85,7 +86,17 @@
     gameState.pickedBalls.push(randomBall);
 
     // call the ball
-    callBall(randomBall.number, randomBall.letter, $setting);
+    voiceCall(randomBall.number, randomBall.letter, $setting);
+  }
+  function voiceCall(number, letter, setting) {
+    callBall(number, letter, setting);
+  }
+  // reapet call
+  function repeatCall() {
+    let lastBall = gameState.pickedBalls[gameState.pickedBalls.length - 1];
+    if (lastBall) {
+      voiceCall(lastBall.number, lastBall.letter, $setting);
+    }
   }
 </script>
 
@@ -98,6 +109,7 @@
       on:newGame={() => newGame()}
       on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}
       on:showSettings={() => (state.currentPage = "Settings")}
+      on:repeatBall={repeatCall}
     />
   {:else if state.currentPage == "DisplayAllBalls"}
     <DisplayBalls

@@ -6,7 +6,7 @@
 </script>
 
 <MenuButton on:click={() => dispatcher("newGame")}>New Game</MenuButton>
-<MenuButton on:click={() => dispatcher("reapeatBall")}>Repeat Ball</MenuButton>
+<MenuButton on:click={() => dispatcher("repeatBall")}>Repeat Ball</MenuButton>
 <MenuButton on:click={() => dispatcher("nextBall")}>Next Ball</MenuButton>
 <MenuButton on:click={() => dispatcher("showPickedBalls")}
   >Show Picked Balls</MenuButton
