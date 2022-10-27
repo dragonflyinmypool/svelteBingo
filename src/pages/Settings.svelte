@@ -62,11 +62,14 @@
 <style>
   .column {
     display: grid;
-    grid-template-columns: 300px 300px;
+    grid-template-columns: 350px 275px;
     grid-template-rows: repeat(4, 125px);
     grid-gap: 10px;
     justify-content: center;
     align-items: center;
+    line-height: 40px;
+    text-align: left;
+    margin: 0px 70px;
   }
   span {
     font-size: 40px;

@@ -16,13 +16,12 @@
   #mainContent {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-evenly;
     height: 800px;
+    gap: 50px;
   }
   #menu {
-    margin-top: 80px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;

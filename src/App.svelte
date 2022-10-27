@@ -1,13 +1,12 @@
 <script>
-  // Pages
-  import MainView from "./pages/MainView.svelte";
-  import DisplayBalls from "./pages/DisplayBalls.svelte";
-  import Settings from "./pages/Settings.svelte";
   // Stores
   import { setting } from "./stores/settingsStore.js";
   // lib
   import { callBall } from "./lib/callBalls.js";
-  import { loop_guard } from "svelte/internal";
+  // Pages
+  import MainView from "./pages/MainView.svelte";
+  import DisplayBalls from "./pages/DisplayBalls.svelte";
+  import Settings from "./pages/Settings.svelte";
 
   // Game state
   let gameState = {
@@ -23,9 +22,9 @@
   // *** NEW GAME ***
   // Start a new game
   function newGame() {
-    // clear picked balls
+    // Clear picked balls
     gameState.pickedBalls = [];
-    // add all balls
+    // Create new ball set
     gameState.unpickedBalls = createBalls($setting.numberOfBalls);
   }
 
@@ -86,16 +85,14 @@
     gameState.pickedBalls.push(randomBall);
 
     // call the ball
-    voiceCall(randomBall.number, randomBall.letter, $setting);
+    callCurrentBall();
   }
-  function voiceCall(number, letter, setting) {
-    callBall(number, letter, setting);
-  }
-  // reapet call
-  function repeatCall() {
+
+  // Call the current ball
+  function callCurrentBall() {
     let lastBall = gameState.pickedBalls[gameState.pickedBalls.length - 1];
     if (lastBall) {
-      voiceCall(lastBall.number, lastBall.letter, $setting);
+      callBall(lastBall.number, lastBall.letter, $setting);
     }
   }
 </script>
@@ -109,7 +106,7 @@
       on:newGame={() => newGame()}
       on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}
       on:showSettings={() => (state.currentPage = "Settings")}
-      on:repeatBall={repeatCall}
+      on:repeatBall={callCurrentBall}
     />
   {:else if state.currentPage == "DisplayAllBalls"}
     <DisplayBalls
@@ -120,9 +117,3 @@
     <Settings on:back={() => (state.currentPage = "MainView")} />
   {/if}
 </main>
-
-<style>
-  main {
-    padding: 60px;
-  }
-</style>

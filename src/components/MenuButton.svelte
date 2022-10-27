@@ -15,13 +15,11 @@
 
 <style>
   button {
-    margin: 0px 10px;
-    width: 200px;
+    margin: 0px 15px;
+    width: 210px;
+    height: 60px;
     font-size: 20px;
-    padding: 10px;
-    margin: 10px;
     border-radius: 10px;
-    background-color: blue;
     border: none;
     cursor: pointer;
   }

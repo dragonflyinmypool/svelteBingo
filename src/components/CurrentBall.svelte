@@ -3,7 +3,7 @@
   import { setting } from "../stores/settingsStore.js";
 </script>
 
-<!-- display current ball -->
+<!-- Display current ball -->
 <div id="ball">
   {#if currentBall}
     {#if $setting.numberOfBalls == 75}
@@ -19,13 +19,19 @@
     width: 800px;
     height: 800px;
     border-radius: 50%;
-    background-color: blue;
-    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 250px;
     font-weight: bold;
+  }
+  #ball-letter {
+    font-size: 250px;
+    line-height: 150px;
+  }
+  #ball-number {
+    font-size: 500px;
+    line-height: 500px;
   }
 </style>

@@ -2,52 +2,44 @@
   export let unpickedBalls;
   export let pickedBalls;
 
-  // combined array of picked and unpicked balls
+  // Combined array of picked and unpicked balls
   $: allBalls = [...pickedBalls, ...unpickedBalls];
-  // sort the balls by number
+  // Sort the balls by number
   $: allBalls.sort((a, b) => a.number - b.number);
 </script>
 
 <!-- display allBalls -->
-<div id="container">
-  <div class="balls">
-    {#each allBalls as ball}
-      <div class="ball {ball.picked ? 'picked' : 'notpicked'}">
-        <div class="ball-number ">
-          {ball.number}
-        </div>
+<div class="balls">
+  {#each allBalls as ball}
+    <div class="ball {ball.picked ? 'picked' : 'notpicked'}">
+      <div class="ball-number ">
+        {ball.number}
       </div>
-    {/each}
-  </div>
+    </div>
+  {/each}
 </div>
 
 <style>
-  #container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    height: 700px;
-  }
-  /* create rows of 10 balls */
   .balls {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-gap: 10px;
-    max-width: 700px;
+    grid-template-columns: repeat(10, 90px);
+    grid-template-rows: repeat(10, 80px);
+    justify-items: center;
+    align-items: center;
   }
   .ball {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    color: gray;
+    font-size: 50px;
+    line-height: 70px;
+    font-weight: 700;
+    display: inline-block;
+    background: grey;
+    color: grey;
   }
   .picked {
-    color: white;
-    background-color: blue;
+    background: #fbe3ff;
+    color: #0f1152;
   }
 </style>
