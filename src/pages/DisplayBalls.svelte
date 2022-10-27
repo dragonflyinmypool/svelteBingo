@@ -1,4 +1,8 @@
 <script>
+  // Template
+  import Template from "../templates/Template.svelte";
+
+  // Components
   import MenuButton from "../components/MenuButton.svelte";
   import DisplayAllBalls from "../components/DisplayAllBalls.svelte";
 
@@ -8,31 +12,11 @@
   export let gameState;
 </script>
 
-<div>
-  <main>
-    <DisplayAllBalls
-      unpickedBalls={gameState.unpickedBalls}
-      pickedBalls={gameState.pickedBalls}
-    />
-  </main>
-  <section>
-    <MenuButton on:click={() => dispatcher("back")}>Back</MenuButton>
-  </section>
-</div>
-
-<style>
-  main {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-  }
-  section {
-    margin-top: 80px;
-  }
-  /* center div elements */
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-</style>
+<Template>
+  <DisplayAllBalls
+    slot="1"
+    unpickedBalls={gameState.unpickedBalls}
+    pickedBalls={gameState.pickedBalls}
+  />
+  <MenuButton slot="menu" on:click={() => dispatcher("back")}>Back</MenuButton>
+</Template>

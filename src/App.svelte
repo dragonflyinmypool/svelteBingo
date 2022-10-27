@@ -96,8 +96,8 @@
   {#if state.currentPage == "MainView"}
     <MainView
       {gameState}
-      on:newGame={() => newGame()}
       on:nextBall={pickNextBall}
+      on:newGame={() => newGame()}
       on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}
       on:showSettings={() => (state.currentPage = "Settings")}
     />
@@ -107,7 +107,7 @@
       on:back={() => (state.currentPage = "MainView")}
     />
   {:else if state.currentPage == "Settings"}
-    <Settings />
+    <Settings on:back={() => (state.currentPage = "MainView")} />
   {/if}
 </main>
 
