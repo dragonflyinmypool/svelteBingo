@@ -5,6 +5,8 @@
   import Settings from "./pages/Settings.svelte";
   // Stores
   import { setting } from "./stores/settingsStore.js";
+  // lib
+  import { callBall } from "./lib/callBalls.js";
 
   // Game state
   let gameState = {
@@ -81,6 +83,9 @@
 
     // add the ball to picked balls
     gameState.pickedBalls.push(randomBall);
+
+    // call the ball
+    callBall(randomBall.number, randomBall.letter, $setting);
   }
 </script>
 
