@@ -8,9 +8,10 @@
   import DisplayAllBalls from "../components/DisplayAllBalls.svelte";
 
   export let gameState;
+  export let showPickedBalls;
 </script>
 
-<Template>
+<Template {showPickedBalls}>
   <CurrentBall
     slot="1"
     currentBall={gameState.pickedBalls[gameState.pickedBalls.length - 1]}

@@ -2,17 +2,9 @@
   // Pages
   import MainView from "./pages/MainView.svelte";
   import DisplayBalls from "./pages/DisplayBalls.svelte";
-  // @ts-ignore
   import Settings from "./pages/Settings.svelte";
-
-  // *** SET STATE ***
-  // Settings
-  let settings = {
-    showPickedBalls: true,
-    numberOfBalls: 75,
-    repeatCall: false,
-    callBallOutloud: [],
-  };
+  // Stores
+  import { setting } from "./stores/settingsStore.js";
 
   // Game state
   let gameState = {
@@ -31,7 +23,7 @@
     // clear picked balls
     gameState.pickedBalls = [];
     // add all balls
-    gameState.unpickedBalls = createBalls(settings.numberOfBalls);
+    gameState.unpickedBalls = createBalls($setting.numberOfBalls);
   }
 
   // Create balls
@@ -52,7 +44,7 @@
 
   // Add letter to bingo ball
   function addLetter(ballNumber) {
-    if (settings.numberOfBalls == 75) {
+    if ($setting.numberOfBalls == 75) {
       let letter = "";
       if (ballNumber <= 15) {
         letter = "B";
@@ -96,6 +88,7 @@
   {#if state.currentPage == "MainView"}
     <MainView
       {gameState}
+      showPickedBalls={$setting.showPickedBalls}
       on:nextBall={pickNextBall}
       on:newGame={() => newGame()}
       on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}

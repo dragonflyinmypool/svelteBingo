@@ -11,4 +11,4 @@
 <MenuButton on:click={() => dispatcher("showPickedBalls")}
   >Show Picked Balls</MenuButton
 >
-<MenuButton on:click={() => dispatcher("showSettings")}>settings</MenuButton>
+<MenuButton on:click={() => dispatcher("showSettings")}>Settings</MenuButton>

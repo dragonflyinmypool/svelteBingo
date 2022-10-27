@@ -1,6 +1,12 @@
+<script>
+  export let showPickedBalls = true;
+</script>
+
 <div id="mainContent">
   <slot name="1" id="one" />
-  <slot name="2" id="two" />
+  {#if showPickedBalls}
+    <slot name="2" id="two" />
+  {/if}
 </div>
 <div id="menu">
   <slot name="menu" id="three" />

@@ -1,11 +1,14 @@
 <script>
   export let currentBall;
+  import { setting } from "../stores/settingsStore.js";
 </script>
 
 <!-- display current ball -->
 <div id="ball">
   {#if currentBall}
-    <div id="ball-letter">{currentBall.letter}</div>
+    {#if $setting.numberOfBalls == 75}
+      <div id="ball-letter">{currentBall.letter}</div>
+    {/if}
     <div id="ball-number">{currentBall.number}</div>
   {/if}
 </div>
