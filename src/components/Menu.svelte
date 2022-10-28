@@ -5,13 +5,13 @@
 
   import { createEventDispatcher } from "svelte";
   const dispatcher = createEventDispatcher();
-
-  console.log($setting.showPickedBalls);
 </script>
 
 <MenuButton on:click={() => dispatcher("newGame")}>New Game</MenuButton>
 
-<MenuButton on:click={() => dispatcher("nextBall")}>Next Ball</MenuButton>
+<MenuButton on:click={() => dispatcher("nextBall")} focus="true"
+  >Next Ball</MenuButton
+>
 
 <MenuButton on:click={() => dispatcher("showSettings")}>Settings</MenuButton>
 {#if !($setting.lang1 == "None" && $setting.lang2 == "None" && $setting.lang3 == "None")}

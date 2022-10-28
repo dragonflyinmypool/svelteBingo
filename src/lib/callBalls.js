@@ -23,7 +23,7 @@ export function callBall(currentBall, currentLetter, settings) {
   let callList = [];
 
   for (var i = 0; i < arrayOfLanguages.length; i++) {
-    if (currentLetter !== "false") {
+    if (currentLetter) {
       callList.push([currentLetter, arrayOfLanguages[i]]);
     }
     callList.push([currentBall, arrayOfLanguages[i]]);

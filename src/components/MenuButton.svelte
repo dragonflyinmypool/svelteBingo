@@ -1,15 +1,19 @@
 <script>
-  export let focus = "false";
+  // import on mount
   import { onMount } from "svelte";
+  export let focus = "false";
 
-  let defaultButton;
-
-  if (focus == "true") {
-    onMount(() => defaultButton.focus());
-  }
+  // on mount
+  onMount(() => {
+    if (focus === "true") {
+      let element = document.getElementById("true");
+      element.focus();
+      console.log(element, focus);
+    }
+  });
 </script>
 
-<button bind:this={defaultButton} on:click>
+<button on:click id={focus}>
   <slot />
 </button>
 

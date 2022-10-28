@@ -18,5 +18,7 @@
     unpickedBalls={gameState.unpickedBalls}
     pickedBalls={gameState.pickedBalls}
   />
-  <MenuButton slot="menu" on:click={() => dispatcher("back")}>Back</MenuButton>
+  <MenuButton slot="menu" on:click={() => dispatcher("back")} focus="true"
+    >Back</MenuButton
+  >
 </Template>

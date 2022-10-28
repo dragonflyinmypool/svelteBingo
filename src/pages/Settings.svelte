@@ -56,7 +56,9 @@
     <span>Repeat Call </span>
     <CheckB bind:currentSetting={$setting.repeatCall} />
   </div>
-  <MenuButton slot="menu" on:click={() => dispatcher("back")}>Back</MenuButton>
+  <MenuButton slot="menu" on:click={() => dispatcher("back")} focus="true"
+    >Back</MenuButton
+  >
 </Template>
 
 <style>
