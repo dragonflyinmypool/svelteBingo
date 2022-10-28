@@ -2,18 +2,18 @@
   // import on mount
   import { onMount } from "svelte";
   export let focus = "false";
+  export let large = "";
 
   // on mount
   onMount(() => {
     if (focus === "true") {
       let element = document.getElementById("true");
       element.focus();
-      console.log(element, focus);
     }
   });
 </script>
 
-<button on:click id={focus}>
+<button on:click id={focus} class={large}>
   <slot />
 </button>
 
@@ -26,5 +26,11 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
+  }
+  .large {
+    width: 300px;
+    height: 80px;
+    font-size: 40px;
+    line-height: 40px;
   }
 </style>
