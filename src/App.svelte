@@ -14,9 +14,14 @@
     pickedBalls: [],
   };
 
+  // Check for stored previous game state
+  let previousGameState = JSON.parse(localStorage.getItem("gameState"));
+  let restorable = previousGameState ? true : false;
+
   // App state
-  let state = {
+  let appState = {
     currentPage: "MainView",
+    restorable: restorable,
   };
 
   // *** NEW GAME ***
@@ -86,6 +91,9 @@
 
     // call the ball
     callCurrentBall();
+
+    localStorage.setItem("gameState", JSON.stringify(gameState));
+    appState.restorable = false;
   }
 
   // Call the current ball
@@ -95,25 +103,36 @@
       callBall(lastBall.number, lastBall.letter, $setting);
     }
   }
+  console.log(gameState);
+
+  // function to restore game state
+  function restoreGame() {
+    console.log(gameState);
+
+    gameState = previousGameState;
+    appState.restorable = false;
+  }
 </script>
 
 <main>
-  {#if state.currentPage == "MainView"}
+  {#if appState.currentPage == "MainView"}
     <MainView
       {gameState}
       showPickedBalls={$setting.showPickedBalls}
+      restorable={appState.restorable}
       on:nextBall={pickNextBall}
       on:newGame={() => newGame()}
-      on:showPickedBalls={() => (state.currentPage = "DisplayAllBalls")}
-      on:showSettings={() => (state.currentPage = "Settings")}
+      on:showPickedBalls={() => (appState.currentPage = "DisplayAllBalls")}
+      on:showSettings={() => (appState.currentPage = "Settings")}
       on:repeatBall={callCurrentBall}
+      on:restorePreviousGame={restoreGame}
     />
-  {:else if state.currentPage == "DisplayAllBalls"}
+  {:else if appState.currentPage == "DisplayAllBalls"}
     <DisplayBalls
       {gameState}
-      on:back={() => (state.currentPage = "MainView")}
+      on:back={() => (appState.currentPage = "MainView")}
     />
-  {:else if state.currentPage == "Settings"}
-    <Settings on:back={() => (state.currentPage = "MainView")} />
+  {:else if appState.currentPage == "Settings"}
+    <Settings on:back={() => (appState.currentPage = "MainView")} />
   {/if}
 </main>

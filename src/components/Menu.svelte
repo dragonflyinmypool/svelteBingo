@@ -1,10 +1,10 @@
 <script>
   import { setting } from "../stores/settingsStore.js";
-
-  import MenuButton from "../components/MenuButton.svelte";
-
   import { createEventDispatcher } from "svelte";
+  import MenuButton from "../components/MenuButton.svelte";
   const dispatcher = createEventDispatcher();
+
+  export let restorable;
 </script>
 
 <div id="menu">
@@ -29,6 +29,11 @@
     {#if !$setting.showPickedBalls}
       <MenuButton on:click={() => dispatcher("showPickedBalls")}
         >Show Picked Balls</MenuButton
+      >
+    {/if}
+    {#if restorable}
+      <MenuButton on:click={() => dispatcher("restorePreviousGame")}
+        >Restore Previous Game</MenuButton
       >
     {/if}
   </span>

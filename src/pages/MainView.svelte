@@ -9,6 +9,7 @@
 
   export let gameState;
   export let showPickedBalls;
+  export let restorable;
 </script>
 
 <Template {showPickedBalls}>
@@ -28,5 +29,7 @@
     on:showPickedBalls
     on:showSettings
     on:repeatBall
+    on:restorePreviousGame
+    {restorable}
   />
 </Template>
