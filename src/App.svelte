@@ -112,6 +112,10 @@
     gameState = previousGameState;
     appState.restorable = false;
   }
+  // if settings.numberOfBalls is mutated, start a new game
+  $: if ($setting.numberOfBalls) {
+    newGame();
+  }
 </script>
 
 <main>
