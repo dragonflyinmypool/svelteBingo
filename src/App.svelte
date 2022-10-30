@@ -116,6 +116,10 @@
   $: if ($setting.numberOfBalls) {
     newGame();
   }
+  // if current page is set to settings, remove restore button
+  $: if (appState.currentPage == "Settings") {
+    appState.restorable = false;
+  }
 </script>
 
 <main>
