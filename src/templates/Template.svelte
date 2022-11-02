@@ -2,6 +2,7 @@
   export let showPickedBalls = true;
 </script>
 
+<header id="header"><slot name="header" /></header>
 <div id="mainContent">
   <slot name="1" id="one" />
   {#if showPickedBalls}
@@ -13,6 +14,10 @@
 </div>
 
 <style>
+  #header {
+    font-size: 20px;
+    padding: 0px 0px 10px 0px;
+  }
   #mainContent {
     width: 100%;
     display: flex;

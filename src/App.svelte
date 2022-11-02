@@ -113,7 +113,10 @@
     appState.restorable = false;
   }
   // if settings.numberOfBalls is mutated, start a new game
-  $: if ($setting.numberOfBalls) {
+  $: if (
+    $setting.numberOfBalls !=
+    gameState.unpickedBalls.length + gameState.pickedBalls.length
+  ) {
     newGame();
   }
   // if current page is set to settings, remove restore button

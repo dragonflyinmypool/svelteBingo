@@ -27,6 +27,9 @@
 </script>
 
 <Template>
+  <div slot="header">
+    For requests or to report any issues contact jheiney10@gmail.com
+  </div>
   <div slot="1" class="column">
     <span>Ball Numbers</span>
     <SelectDropDown
@@ -75,5 +78,6 @@
   }
   span {
     font-size: 40px;
+    color: white;
   }
 </style>
