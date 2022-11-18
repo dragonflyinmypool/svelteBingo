@@ -1,5 +1,6 @@
+import { Howl, Howler } from "howler";
+
 export function callBall(currentBall, currentLetter, settings) {
-  let audio = new Audio();
   let timing = 0;
   let callListIndex = 0;
 
@@ -37,34 +38,30 @@ export function callBall(currentBall, currentLetter, settings) {
     }
   }
 
-  executeQueOfCalls();
-
+  console.log(callList);
   // GO through the call list, send to the timer
-
-  function executeQueOfCalls(callListIndex) {
-    if (callList.length > callListIndex) {
-      sendTheCallsWith(callList[callListIndex]);
-      console.log(callListIndex);
+  function callNext() {
+    if (callListIndex < callList.length) {
+      let whatToSay = callList[callListIndex][0];
+      let lang = callList[callListIndex][1];
+      callListIndex++;
+      call(whatToSay, lang);
     }
   }
 
-  // Send the calls to the caller with a timer
-  function sendTheCallsWith(call) {
-    setTimeout(() => {
-      theCaller(call[0], call[1]);
-    }, timing);
-    timing = 2000;
+  // Call the audio file
+  function call(whatToSay, lang) {
+    console.log(whatToSay, lang);
+    let audio = new Howl({
+      src: [`./assets/${lang}/${whatToSay}.ogg`],
+      onend: function () {
+        setTimeout(() => {
+          callNext();
+        }, 1500);
+      },
+    });
+    audio.play();
   }
 
-  //Call the calls
-  function theCaller(whatToSay, lang) {
-    audio.src = "/assets/" + lang + "/" + whatToSay + ".ogg";
-    audio.play();
-    // check if the audio is finished playing
-    audio.onended = function () {
-      callListIndex++;
-      executeQueOfCalls(callListIndex);
-      console.log("finished");
-    };
-  }
+  callNext();
 }
