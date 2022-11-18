@@ -44,7 +44,6 @@ export function callBall(currentBall, currentLetter, settings) {
   function executeQueOfCalls(callListIndex) {
     if (callList.length > callListIndex) {
       sendTheCallsWith(callList[callListIndex]);
-
       console.log(callListIndex);
     }
   }
