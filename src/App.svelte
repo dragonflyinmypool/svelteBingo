@@ -103,7 +103,6 @@
       callBall(lastBall.number, lastBall.letter, $setting);
     }
   }
-  console.log(gameState);
 
   // function to restore game state
   function restoreGame() {

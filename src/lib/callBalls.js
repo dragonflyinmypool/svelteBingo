@@ -1,6 +1,7 @@
 export function callBall(currentBall, currentLetter, settings) {
   let audio = new Audio();
   let timing = 0;
+  let callListIndex = 0;
 
   // Make an array with all the languages to be called
   function checkSettings() {
@@ -39,9 +40,12 @@ export function callBall(currentBall, currentLetter, settings) {
   executeQueOfCalls();
 
   // GO through the call list, send to the timer
-  function executeQueOfCalls() {
-    for (var i = 0; i < callList.length; i++) {
-      sendTheCallsWith(callList[i]);
+
+  function executeQueOfCalls(callListIndex) {
+    if (callList.length > callListIndex) {
+      sendTheCallsWith(callList[callListIndex]);
+
+      console.log(callListIndex);
     }
   }
 
@@ -50,12 +54,18 @@ export function callBall(currentBall, currentLetter, settings) {
     setTimeout(() => {
       theCaller(call[0], call[1]);
     }, timing);
-    timing = timing + 2000;
+    timing = 2000;
   }
 
   //Call the calls
   function theCaller(whatToSay, lang) {
     audio.src = "/assets/" + lang + "/" + whatToSay + ".ogg";
     audio.play();
+    // check if the audio is finished playing
+    audio.onended = function () {
+      callListIndex++;
+      executeQueOfCalls(callListIndex);
+      console.log("finished");
+    };
   }
 }
